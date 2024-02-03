@@ -47,7 +47,7 @@ class LoginController extends Controller
             $user->save();
             Session::put('register_id',$user->id);
         }
-        return redirect()->route('login');
+        return redirect()->route('sign_in');
 
     }
 }
