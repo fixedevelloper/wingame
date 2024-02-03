@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,15 +18,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $address=Session::get("address_connect");
-        //$user=User::query()->firstWhere(['address'=>$address]);
-        $verifies=explode(",",env("ADMIN"));
-        logger("************* connection admin");
-        logger($address);
-       // logger($verifies);
-        if (in_array($address,$verifies)) {
+        if (Auth::user() && (Auth::user()->user_type == User::ADMIN_TYPE)) {
             return $next($request);
         }
-        return redirect()->route('home');
+        return redirect()->route('sign_in');
     }
 }
