@@ -1,0 +1,304 @@
+.break{
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+
+}
+.dashboard__body__wrap .account__head::before {
+    position: absolute;
+    content: "";
+    background-color: var(--slidebox);
+    height: 72px;
+    right: 0;
+    top: 97px;
+    width: 0 !important;
+    z-index: -1;
+}
+.custom_card {
+    border: 1px solid var(--paycheck);
+    padding: 40px 40px;
+    background: var(--slidebox);
+    border-radius: 10px;
+    margin: 0 0 !important;
+}
+.deposit__complate {
+    border: 1px solid var(--active-color);
+    padding: 40px 40px;
+    background: var(--slidebox);
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 0 !important;
+}
+.main__table .table > :not(caption) > * > * {
+    padding: .5rem .5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 0 !important;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+/*CHECKBOX*/
+.mart__point__items input{ display:none; }
+
+.mart__point__items label div{
+    width:23px;
+    height:23px;
+    display:inline-block;
+    border:2px solid #fff;
+    text-align:center;
+    line-height:20px;
+    margin-right:6px;
+    border-radius:3px;
+    cursor:pointer;
+}
+
+label i{ font-size:16px;	opacity:0; }
+label:hover div{ background:#16a085; }
+input:checked+label i{ opacity:1; }
+input:checked+label div{ background:#16a085; }
+/*** end check box***/
+.t__items__left h6{
+    font-weight: 800 !important;
+    font-size: 16px !important;
+}
+
+.nice-select .list {
+    background-color: #0b0b0b !important;
+}
+.left_country {
+    position: sticky;
+    top: 140px;
+    height: 200px;
+    padding-bottom: 200px;
+   /* overflow-y: scroll;*/
+    background-color: var(--slidebox);
+    border-bottom: solid #ffffff 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+}
+.card_dark{
+    background-color: var(--slidebox);
+}
+.block_country{
+    max-height: 50px;
+    height: 200px;
+}
+.block_league{
+
+}
+.card_body_dark{
+    background-color: var(--slidebox);
+}
+.card_d{
+    --bs-card-border-radius:0px !important;
+    color: #f7fafc;
+}
+.dashboard__body__wrap .account__head2 {
+    color: var(--white);
+    background: var(--slidebox);
+    padding: 20px 30px 27px;
+    z-index: 1;
+}
+.block-item{
+    border-bottom: solid #ffffff 1px;
+    padding: 5px;
+    display: block;
+}
+.table-ranking{
+    color: #ffffff;
+}
+.accordion-button{
+    background-color: var(--header) !important;
+    color: #f1f1f1 !important;
+}
+.accordion-item{
+    color: #f1f1f1 !important;
+}
+.pagination {
+    --bs-pagination-bg: var(--header) !important;
+}
+/* The side navigation menu */
+.sidebar {
+    top: 140px;
+    padding: 0;
+    width: 200px;
+    background-color: var(--header);
+    position: inherit;
+    color: #f1f1f1;
+    height: auto;
+    max-height: 400px;
+    overflow: auto;
+    overflow-y: scroll;
+    margin: 0 0 20px;
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: block;
+    padding: 10px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+    .sidebar a {
+        text-align: center;
+        float: none;
+    }
+}
+/******************************tabs*/
+.nice-select,
+.nice-select.open .list {
+    width: 100%;
+    width: 325px;
+    border-radius: 8px;
+}
+
+.nice-select .list::-webkit-scrollbar {
+    width: 0
+}
+
+.nice-select .list {
+    margin-top: 5px;
+    top: 100%;
+    border-top: 0;
+    border-radius: 0 0 5px 5px;
+    max-height: 210px;
+    overflow-y: scroll;
+    padding: 52px 0 0
+}
+
+.nice-select.has-multiple {
+    white-space: inherit;
+    height: auto;
+    padding: 7px 12px;
+    min-height: 53px;
+    line-height: 22px
+}
+
+.nice-select.has-multiple span.current {
+    border: 1px solid #CCC;
+    background: #EEE;
+    padding: 0 10px;
+    border-radius: 3px;
+    display: inline-block;
+    line-height: 24px;
+    font-size: 14px;
+    margin-bottom: 3px;
+    margin-right: 3px
+}
+
+.nice-select.has-multiple .multiple-options {
+    display: block;
+    line-height: 37px;
+    margin-left: 30px;
+    padding: 0
+}
+
+.nice-select .nice-select-search-box {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    margin-top: 5px;
+    top: 100%;
+    left: 0;
+    z-index: 8;
+    padding: 5px;
+    background: #FFF;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 0 1px rgba(68, 88, 112, .11);
+    -webkit-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-transform: scale(.75) translateY(-21px);
+    -ms-transform: scale(.75) translateY(-21px);
+    transform: scale(.75) translateY(-21px);
+    -webkit-transition: all .2s cubic-bezier(.5, 0, 0, 1.25), opacity .15s ease-out;
+    transition: all .2s cubic-bezier(.5, 0, 0, 1.25), opacity .15s ease-out
+}
+
+.nice-select .nice-select-search {
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: none;
+    color: #333;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 7px 12px;
+    margin: 0 10px 0 0;
+    width: 100%!important;
+    min-height: 36px;
+    line-height: 22px;
+    height: auto;
+    outline: 0!important
+}
+
+.nice-select.open .nice-select-search-box {
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto;
+    -webkit-transform: scale(1) translateY(0);
+    -ms-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0)
+}
+
+.remove:hover {
+    color: red
+}
+
+.text-rotation {
+    text-align: center;
+    vertical-align: middle;
+    width: 50px;
+}
+.text-rotation > span {
+    position: absolute;
+    bottom: 130px;
+    left: -30px;
+    transform: translate(25px,51px) rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+}
+@media screen and (max-width: 575px) {
+    .main__table .table__wrap .table__items {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0 15px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+}
