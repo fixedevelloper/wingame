@@ -11,9 +11,11 @@ use App\Models\LottoFixture;
 use App\Models\LottoFixtureItem;
 use App\Models\Payment;
 use App\Models\PlayingFixture;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class BackendController extends Controller
@@ -26,6 +28,36 @@ class BackendController extends Controller
             "address"=>$address,
             "users"=>$users,
             'route'=>"partipates"
+        ]);
+    }
+    public function transaction(Request $request)
+    {
+        $transactions=Transaction::query()->orderByDesc("id")->get();
+        return view('backend.transaction', [
+            'route'=>"transaction",
+            'transactions'=>$transactions
+        ]);
+    }
+    public function transaction_detail(Request $request,$id)
+    {
+        $transaction=Transaction::query()->find($id);
+        if ($request->method()=="POST"){
+            if ($transaction->status !=="complete"){
+                $transaction->amount=$request->get("amount");
+                $transaction->status=$request->get("status");
+                $transaction->save();
+                if ($transaction->status=="complete"){
+                    $user=$transaction->user;
+                    $user->last_sold=$user->sold;
+                    $user->sold+=$transaction->amount;
+                    $user->save();
+                }
+            }
+
+        }
+        return view('backend.transaction_detail', [
+            'route'=>"transaction",
+            'transaction'=>$transaction
         ]);
     }
     public function lotto_fixture_list(Request $request)

@@ -23,12 +23,22 @@
                 </a>
             </li>
             <li>
+                <a href="{{route("admin.transaction")}}" @if($route=="transaction") class="active" @endif>
+                                    <span class="icons">
+                                        <i class="icon-history"></i>
+                                    </span>
+                    <span>
+                                       Transction History
+                                    </span>
+                </a>
+            </li>
+            <li>
                 <a href="{{route("admin.partipates")}}" @if($route=="partipates") class="active" @endif>
                                     <span class="icons">
                                         <i class="icon-user"></i>
                                     </span>
                     <span>
-                                       List participates
+                                       List users
                                     </span>
                 </a>
             </li>

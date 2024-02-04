@@ -1,8 +1,8 @@
-@extends('account.layout')
+@extends('backend.backend')
 
 @section('content')
     <h3 class="account__head mb__30">
-        My Transactions
+        Transactions
     </h3>
     <div class="">
         <div class="custom_card">
@@ -40,8 +40,8 @@
                         <th>Payment Methods</th>
                         <th>Amount</th>
                         <th>Status</th>
-                        <th>Ratio</th>
-                        <th>More</th>
+                        <th>User</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,8 +51,8 @@
                         <td>{{strtoupper($transaction->method)}}</td>
                         <td>{{$transaction->amount}} USD</td>
                         <td class="@if($transaction->status=='pending') pending @elseif($transaction->status=='cancel')cancel @else complate @endif">{{$transaction->status}}</td>
-                        <td></td>
-                        <td class="bold">...</td>
+                        <td>{{$transaction->user->name}}</td>
+                        <td class="bold"><a class="btn btn-outline-primary btn-sm" href="{{route("admin.transaction_detail",['id'=>$transaction->id])}}">Detail</a></td>
                     </tr>
                     @endforeach
             {{--        <tr>

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GamePlay;
 use App\Models\LottoFixture;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -46,9 +47,14 @@ class DashboardController extends Controller
     {
         $user=Auth::user();
         if ($request->method()=="POST"){
-            $user->activate=true;
-            $user->save();
-            return redirect()->route('dashboard');
+            $transaction=new Transaction();
+            $transaction->user_id=$user->id;
+            $transaction->method=$request->get("method");
+            $transaction->idproof=$request->get("idproof");
+            $transaction->type="deposit";
+            $transaction->status="pending";
+            $transaction->save();
+            return redirect()->route("transaction");
         }
         return view('account.deposit', [
             'route'=>"deposit",
@@ -64,8 +70,14 @@ class DashboardController extends Controller
     }
     public function transaction(Request $request)
     {
+        $user=Auth::user();
+        if ($request->method()=="post"){
+
+        }
+        $transactions=Transaction::query()->where(['user_id'=>$user->id])->get();
         return view('account.transaction', [
-            'route'=>"transaction"
+            'route'=>"transaction",
+            'transactions'=>$transactions
         ]);
     }
     public function myGame(Request $request)

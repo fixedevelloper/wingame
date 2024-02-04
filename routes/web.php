@@ -22,8 +22,7 @@ Route::match(['POST','GET'],'/register_post', [LoginController::class, 'register
     ->name('register_post');
 Route::get('/destroy', [LoginController::class, 'destroy'])
     ->name('destroy');
-Route::match(['POST','GET'],'/deposit', [DashboardController::class, 'deposit'])
-    ->name('deposit');
+
 Route::match(['POST','GET'],'/post_conbinaison', [FrontController::class, 'postConbinaison'])
     ->name('postConbinaison');
 Route::match(['POST','GET'],'/post_game', [FrontController::class, 'postGame'])
@@ -34,19 +33,24 @@ Route::get('/game/{id}', [FrontController::class, 'game'])
     ->name('game');
 Route::get('/resultat/{id}', [FrontController::class, 'resultat'])
     ->name('resultat');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])
+        ->name('dashboard');
+    Route::get('my-game', [DashboardController::class, 'myGame'])
+        ->name('mygame');
+    Route::get('bonus', [DashboardController::class, 'bonus'])
+        ->name('bonus');
+    Route::get('withdraw', [DashboardController::class, 'withdraw'])
+        ->name('withdraw');
+    Route::get('transaction', [DashboardController::class, 'transaction'])
+        ->name('transaction');
+    Route::get('settings', [DashboardController::class, 'settings'])
+        ->name('settings');
+    Route::match(['POST','GET'],'/deposit', [DashboardController::class, 'deposit'])
+        ->name('deposit');
+});
 
-Route::get('dashboard', [DashboardController::class, 'dashboard'])
-    ->name('dashboard');
-Route::get('my-game', [DashboardController::class, 'myGame'])
-    ->name('mygame');
-Route::get('bonus', [DashboardController::class, 'bonus'])
-    ->name('bonus');
-Route::get('withdraw', [DashboardController::class, 'withdraw'])
-    ->name('withdraw');
-Route::get('transaction', [DashboardController::class, 'transaction'])
-    ->name('transaction');
-Route::get('settings', [DashboardController::class, 'settings'])
-    ->name('settings');
+
 Route::get('logout', [LoginController::class, 'destroy'])
     ->name('logout');
 Route::get('/register', [FrontController::class, 'register'])
@@ -57,7 +61,7 @@ Route::match(['POST','GET'],'/register_ajax', [FrontController::class, 'register
 Route::match(['POST','GET'],'/login_ajax', [FrontController::class, 'login_next'])->name('login_next');
 Route::match(['POST','GET'],'/get_balance', [FrontController::class, 'getBalance'])->name('get_balance');
 Route::match(['POST','GET'],'/check_register', [FrontController::class, 'check_register'])->name('check_register');
-Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => ['isAdmin']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => ['auth','isAdmin']], function () {
     Route::match(["POST", "GET"], '/lotto_fixture_list', [BackendController::class, 'lotto_fixture_list'])
         ->name('lotto_fixture_list');
     Route::match(["POST", "GET"], '/partipates', [BackendController::class, 'partipates'])
@@ -70,6 +74,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => ['isAdmin']]
         ->name('payment');
     Route::get('configuration', [BackendController::class, 'configuration'])
         ->name('configuration');
+    Route::get('transaction', [BackendController::class, 'transaction'])
+        ->name('transaction');
+    Route::match(["POST", "GET"],'transaction/{id}', [BackendController::class, 'transaction_detail'])
+        ->name('transaction_detail');
     Route::match(["POST", "GET"], '/post_payment', [BackendController::class, 'postPayment'])
         ->name('post_payment');
 });

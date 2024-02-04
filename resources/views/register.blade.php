@@ -12,7 +12,7 @@
                                 @csrf
                                 <div class="text-white">
                                     <label class="form-label" for="email34">Name</label>
-                                    <input class="form-control" type="text" id="email34" name="name" placeholder="">
+                                    <input class="form-control" autocomplete="false" type="text" id="email34" name="name" placeholder="">
                                 </div>
                                 <div class="text-white">
                                     <label class="form-label" for="email35">Phone</label>
@@ -29,7 +29,7 @@
                                     </button>
                                 </div>
                                 <p>
-                                    Do you have an account? <a href="#0">Login</a>
+                                    Do you have an account? <a href="{{route("sign_in")}}">Login</a>
                                 </p>
                             </form>
                     </div>

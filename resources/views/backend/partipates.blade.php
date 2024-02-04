@@ -2,16 +2,19 @@
 
 @section('content')
     <h3 class="account__head mb__30">
-        List Users
+        List Users <a class="btn btn-sm btn-outline-success float-end">Add admin</a>
     </h3>
-    <div class="card text-white">
-        <div class="card-body card_body_dark">
-            <table class="table text-white">
+    <div class="">
+        <div class="custom_card casinoform__tabe">
+
+            <table class="">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Balance</th>
+                    <th>Role</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -19,7 +22,9 @@
                     <tr>
                         <td>{{$loop->index}}</td>
                         <td>{{$user->name}}</td>
-                        <td>{{$user->address}}</td>
+                        <td>{{$user->phone}}</td>
+                        <td>{{$user->sold}}</td>
+                        <td>@if($user->user_type==0) Admin @else User @endif</td>
                     </tr>
                 @endforeach
                 </tbody>

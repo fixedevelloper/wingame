@@ -6,9 +6,9 @@
     </h3>
 
     <div class="row">
-        <div class="col-md-8 mt-5">
-            <div class="card card_dark">
-                <div class="card-body">
+        <div class="col-md-8 mt-3">
+            <div class="">
+                <div class="custom_card casinoform__tabe">
                    <table class="table text-white" id="table_conbinaison">
                        <thead>
                        <tr>
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mt-5">
+        <div class="col-md-4 mt-5 custom_card">
             <div class="">
                 <label class="text-white">Title</label>
                 <input class="form-control" id="title">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="dashboard__body__wrap p-5">
         <h3 class="account__head2 mb__30">
-            Deposit <h3 class="float-end balance">Balance:{{$user->sold}}</h3>
+            Deposit <span class="float-end balance">Balance:{{$user->sold}}</span>
         </h3>
         <div class="payment__cart__check">
             <div class="row g-4">
@@ -41,17 +41,18 @@
             </h3>
             <div class="row">
                 <dl class="text-white text-start">
-                    <dt>Phone number</dt>
-                    <dd>+242XXXXXXXXXXXXXXXXXXXXXXXXX</dd>
+                    <dt>Code marchant</dt>
+                    <dd>833425</dd>
                     <dt>Name</dt>
-                    <dd>MR DONALD EBVOUNDI</dd>
+                    <dd>ETS AGENSIC SOLUTION</dd>
                 </dl>
             </div>
             <p class="mb-3 text-white">Enter ID of transaction</p>
             <form method="POST">
                 @csrf
+                <input name="method" value="momopay" hidden>
                 <div class="single-input mb__20">
-                    <input type="text" id="dAmount" placeholder="ID of transaction" value="20.00" autocomplete="off">
+                    <input type="text" id="idproof" name="idproof" placeholder="ID of transaction" value="20.00" autocomplete="off">
                 </div>
                 <div class="btn-area">
                     <button type="submit" class="cmn--btn">

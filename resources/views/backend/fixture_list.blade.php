@@ -6,7 +6,7 @@
     </h3>
 
     <div class="row">
-        <div class="card card_dark mt-5">
+{{--        <div class="card card_dark mt-5">
             <div class="card-body">
                 <form id="form_grille">
                     <div class="col-md-6">
@@ -17,10 +17,38 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div>--}}
         <div class="col-md-12 mt-5">
-            <div class="card card_dark">
-                <div class="card-body">
+            <div class="">
+                <div class="custom_card casinoform__tabe">
+                    <div class="cainoform__wrap">
+                        <form id="form_grille">
+                        <div class="row g-4">
+                            <div class="col-xl-6">
+                                <div class="casino__date">
+                                    <h4 class="f__title">
+                                        From
+                                    </h4>
+                                    <div class="calender-bar">
+                                        <input name="date_begin" type="text" class="datepicker" placeholder="2023-2-2">
+                                        <i class="icon-calender"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="casino__date">
+                                    <h4 class="f__title">
+                                        Until
+                                    </h4>
+                                    <div class="calender-bar">
+                                        <input name="date_end" id="grille_date" type="text" class="datepicker" placeholder="2023-2-2">
+                                        <i class="icon-calender"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
                     <table class="table text-white" id="table_conbinaison">
                         <thead>
                         <tr>
