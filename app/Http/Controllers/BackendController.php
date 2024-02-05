@@ -63,14 +63,13 @@ class BackendController extends Controller
     public function lotto_fixture_list(Request $request)
     {
         if (is_null($request->get('date'))) {
-            $date_ = Carbon::today()->format('Y-m-d');
-            $timestamp = Carbon::today()->getTimestamp();
+            $begin_date = Carbon::today()->format('Y-m-d');
+            $end_date = Carbon::parse($begin_date)->addDays(1)->format('Y-m-d');
         } else {
-            $date_ = $request->get('date');
-            $date_ = Carbon::parse($date_)->format('Y-m-d');
+            $begin_date = $request->get('date');
+            $end_date=$request->get('date_end');
         }
-        $end_date = Carbon::parse($date_)->addDays(1)->format('Y-m-d');
-        $data = LottoFixture::query()->whereBetween('end_time', [$date_, $end_date])->get();
+        $data = LottoFixture::query()->whereBetween('end_time', [$begin_date, $end_date])->get();
         return view('backend.fixture_list', [
             'lis_fixtures' => $data,
             'route' => "lis_fixtures",
