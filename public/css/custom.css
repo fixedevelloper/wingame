@@ -302,3 +302,16 @@ div.content {
         padding-top: 20px;
     }
 }
+@media (max-width:600px) {
+    h2 {
+        font-size: 20px !important;
+    }
+    h6 {
+        font-size: 12px !important;
+    }
+    .break {
+        display: block;
+        font-size: 12px;
+        font-weight: 800;
+    }
+}
