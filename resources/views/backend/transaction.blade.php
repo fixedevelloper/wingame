@@ -26,7 +26,7 @@
                                     Until
                                 </h4>
                                 <div class="calender-bar">
-                                    <input value="{{$begin_date}}" name="date_end" type="text" class="datepicker" id="myform_game_input" placeholder="2023-2-2">
+                                    <input value="{{$end_date}}" name="date_end" type="text" class="datepicker" id="myform_game_input" placeholder="2023-2-2">
                                     <i class="icon-calender"></i>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 
 use App\Models\Fixture;
+use App\Models\GamePlay;
 use App\Models\LottoFixtureItem;
 use App\Models\Odd;
 use App\Models\PlayingFixture;
@@ -142,4 +143,9 @@ class Helpers
 
         return $amount_winners;
     }
+  static function calculSoldeGrille($lotto_fixture_id){
+        $games=GamePlay::query()->where(['lotto_fixture_id'=>$lotto_fixture_id])->count();
+        return $games*env("PRICE_GAME");
+
+   }
 }

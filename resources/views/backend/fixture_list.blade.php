@@ -42,6 +42,7 @@
                         <tr>
                             <th>Date End</th>
                             <th>Title</th>
+                            <th>Cagnote</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -50,6 +51,7 @@
                           <tr>
                               <td>{{$fixture->end_time}}</td>
                               <td>{{$fixture->title}}</td>
+                              <td>{{App\Helpers\Helpers::calculSoldeGrille($fixture->id)}} FCFA</td>
                               <td><a class="btn btn-outline-primary" href="{{route('admin.result',['id'=>$fixture->id])}}">Detail</a></td>
                           </tr>
                         @endforeach

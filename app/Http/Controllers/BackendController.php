@@ -138,7 +138,7 @@ class BackendController extends Controller
             $winners[] = [
                 "game_id" => $game->id,
                 "user" => $game->user->name,
-                "name" => $game->user->phone,
+                "phone" => $game->user->phone,
                 "count" => $count,
 
             ];
@@ -177,8 +177,8 @@ class BackendController extends Controller
             }
             $winners[] = [
                 "game_id" => $game->id,
-                "user" => $game->user->id,
-                "address" => $game->user->address,
+                "user" => $game->user->name,
+                "phone" => $game->user->phone,
                 "count" => $count,
             ];
         }

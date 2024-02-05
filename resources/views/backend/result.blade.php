@@ -83,7 +83,7 @@
                 @foreach($winners as $winner)
                     <tr>
                         <td>{{$winner['user']}}</td>
-                        <td>{{$winner['address']}}</td>
+                        <td>{{$winner['phone']}}</td>
                         <td>{{$winner['count']}} / {{sizeof($list_items)}}</td>
                         <td><a class="btn btn-success btn-sm" href="{{route("admin.winner_detail",['id'=>$winner['game_id']])}}">voir</a></td>
                     </tr>
