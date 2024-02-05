@@ -62,12 +62,12 @@ class BackendController extends Controller
     }
     public function lotto_fixture_list(Request $request)
     {
-        if (is_null($request->get('date'))) {
+        if (is_null($request->get('date_begin'))) {
             $begin_date = Carbon::today()->format('Y-m-d');
             $end_date = Carbon::parse($begin_date)->addDays(1)->format('Y-m-d');
         } else {
-            $begin_date = $request->get('date');
-            $end_date=$request->get('date_end');
+            $begin_date = Carbon::parse($request->get('date_begin'))->format('Y-m-d') ;
+            $end_date=Carbon::parse($request->get('date_end'))->format('Y-m-d');
         }
         $data = LottoFixture::query()->whereBetween('end_time', [$begin_date, $end_date])->get();
         return view('backend.fixture_list', [
@@ -125,23 +125,15 @@ class BackendController extends Controller
             }
             $winners[] = [
                 "game_id" => $game->id,
-                "user" => $game->user->id,
-                "address" => $game->user->address,
+                "user" => $game->user->name,
+                "name" => $game->user->phone,
                 "count" => $count,
 
             ];
         }
         $volume  = array_column($winners, 'count');
         array_multisort($volume, SORT_DESC, $winners);
-/*       $winners= array_filter($winners,function ($iten) use ($count_items) {
-            $res=false;
-            $value= $count_items- $iten["count"];
-            if ($value<=2){
-                $res= true;
-            }
-            return $res;
-        });*/
-        logger(Session::get("balance"));
+
         $winners=Helpers::calculAmountWinner(Session::get("balance"),$winners,$count_items);
         return view('backend.payment', [
             "lotto" => $lotto,

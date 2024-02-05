@@ -85,8 +85,7 @@
 
 <!--Main js-->
 <script src="{{asset('js/main.js')}}"></script>
-<script  type="module" src="{{asset('contract/main.js')}}"></script>
-<script src="{{ asset('contract/lotterie.js') }}"></script>
+<script src="{{ asset('lottoJs/lotterie.js') }}"></script>
 <script>
     var configs={
         routes:{

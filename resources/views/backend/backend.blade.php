@@ -61,10 +61,7 @@
 </div>
         <!-- vendor plugins -->
             @stack('scripts')
-            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@1.7.3/dist/web3.min.js"></script>
-            <script src="https://bscscan.com/assets/js/custom/web3-eth.min.js"></script>
-            <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-            <!--Jquery min js-->
+
             <script src="{{asset('js/jquery-3.7.min.js')}}"></script>
             <script src="{{asset("toast/toastr.min.js")}}"></script>
             <!--Bootstrap bundle min js-->
@@ -74,9 +71,7 @@
 
 
             <!--Main js-->
-            <script src="{{asset('js/main.js')}}"></script>
-            <script type="module" src="{{asset('contract/main.js')}}"></script>
-            <script src="{{ asset('contract/lotterie.js') }}"></script>
+            <script src="{{ asset('lottoJs/lotterie.js') }}"></script>
             <script>
                 $(function () {
 

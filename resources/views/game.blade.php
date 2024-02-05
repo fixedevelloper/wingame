@@ -1,7 +1,7 @@
 @extends('base')
 @section('title')  @endsection
 @section('content')
-    <span id="address" hidden>{{$address}}</span>
+    <span id="address" hidden>{{$user}}</span>
     <span id="lotto_fixture_id" hidden>{{$lotto->id}}</span>
     <div class="row mt-3">
         <div class="card card_dark text-white">
@@ -135,7 +135,7 @@
                 type: "POST",
                 dataType: "JSON",
                 data: JSON.stringify({
-                    ob: jsonObj, address: $('#address').text(),lotto_fixture_id:$('#lotto_fixture_id').text()}),
+                    ob: jsonObj, user: $('#address').text(),lotto_fixture_id:$('#lotto_fixture_id').text()}),
                 success: function (data) {
                     toastr.success('Operation executed successfully', 'Success')
                     window.location.reload()

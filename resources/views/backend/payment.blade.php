@@ -25,7 +25,7 @@
                     <tr>
                         <td><input type="checkbox"><span hidden>{{$winner['game_id']}}</span></td>
                         <td>{{$winner['user']}}</td>
-                        <td>{{$winner['address']}}</td>
+                        <td>{{$winner['phone']}}</td>
                         <td>{{$winner['count']}} / {{$count_items}}</td>
                         <td>{{$winner['amount']}}</td>
                     </tr>

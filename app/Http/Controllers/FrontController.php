@@ -42,7 +42,7 @@ class FrontController extends Controller
     }
     public function game(Request $request,$id)
     {
-        $address=Session::get("address_connect");
+        $user=Auth::user();
         $lotto=LottoFixture::find($id);
 
         if (is_null($lotto)){
@@ -52,23 +52,15 @@ class FrontController extends Controller
         $data = LottoFixtureItem::query()->where(['lotto_fixture_id'=>$id])->get();
         $now=new DateTime('now',new \DateTimeZone("Africa/Brazzaville"));
         $interval=new DateTime($lotto->end_time);
-        logger( $now->format("Y-m-d h:i"));
-        logger( $interval->format("Y-m-d h:i"));
-        if ($now->format("Y-m-d h:i")>$interval->format("Y-m-d h:i")){
+        logger( $now->format("Y-m-d H:m"));
+        logger( $interval->format("Y-m-d H:i"));
+        if ($now->format("Y-m-d H:i")>$interval->format("Y-m-d H:i")){
             $is_then=1;
         }
         logger($is_then);
-/*        if (Carbon::parse($lotto->end_time)->greaterThanOrEqualTo(Carbon::now(new \DateTimeZone("Africa/Brazzaville")))){
-            $is_then=1;
-        }
-
-        logger(Carbon::parse($lotto->end_time)->greaterThanOrEqualTo(Carbon::now(new \DateTimeZone("Africa/Brazzaville"))));
-        logger(Carbon::now(new \DateTimeZone("Africa/Brazzaville")));
-        logger(Carbon::parse($lotto->end_time));
-        logger($is_then);*/
         return view('game', [
             "fixtures" => $data,
-            "address"=>$address,
+            "user"=>$user,
             "lotto"=>$lotto,
             "is_then"=>$is_then
         ]);
@@ -159,7 +151,13 @@ class FrontController extends Controller
     {
         $data = json_decode($request->getContent(), true);
         $ob = $data['ob'];
-        $user=User::query()->firstWhere(['address'=>$data['address']]);
+        $user=Auth::user();
+        if (is_null($user)){
+            return response("User not logged",403);
+        }
+        if (is_null($user->sold>1)){
+            return response("Amount not set",403);
+        }
         $game=new GamePlay();
         $game->user_id=$user->id;
         $game->lotto_fixture_id=$data['lotto_fixture_id'];
@@ -172,6 +170,8 @@ class FrontController extends Controller
             $item->loto_fixture_item_id=$ob[$i]['id'];
             $item->save();
         }
+        $user->sold-=1;
+        $user->save();
         return response()->json($ob);
     }
     public function getTeams(Request $request)
