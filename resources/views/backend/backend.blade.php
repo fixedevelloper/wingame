@@ -68,11 +68,10 @@
             <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
             <!--jquery ui min-->
             <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-
-
             <!--Main js-->
-            <script src="{{ asset('lottoJs/lotterie.js') }}"></script>
-            <script>
+            <script src="{{asset('js/main.js')}}"></script>
+<script src="{{ asset('lottoJs/lotterie.js') }}"></script>
+<script>
                 $(function () {
 
                     $('#grille_date').change(function () {

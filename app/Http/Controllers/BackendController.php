@@ -73,6 +73,8 @@ class BackendController extends Controller
         return view('backend.fixture_list', [
             'lis_fixtures' => $data,
             'route' => "lis_fixtures",
+            'date_begin'=>$begin_date,
+            'date_end'=>$end_date
         ]);
     }
 
