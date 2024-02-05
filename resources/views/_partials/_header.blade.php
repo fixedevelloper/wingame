@@ -28,7 +28,7 @@
                     </li>
 
                     @if(!auth()->check())
-                        <li class="d-lg-none">   <a href="javascript:void(0);" onclick="lotto.login()" id="login_id" class="cmn--btn">
+                        <li class="d-lg-none">   <a href="{{route("sign_in")}}" id="login_id" class="cmn--btn">
                                 <span>Se connecter</span>
                             </a>
                         </li>

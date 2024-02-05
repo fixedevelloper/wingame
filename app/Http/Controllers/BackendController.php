@@ -32,10 +32,20 @@ class BackendController extends Controller
     }
     public function transaction(Request $request)
     {
-        $transactions=Transaction::query()->orderByDesc("id")->get();
+        if (is_null($request->get('date_end'))) {
+            $begin = Carbon::today()->format('Y-m-d');
+            $end = Carbon::today()->addDays(1)->format("Y-m-d");
+        } else {
+            $begin = $request->get('date_begin');
+            $end = $request->get('date_end');
+        }
+        $transactions=Transaction::query()->whereBetween('created_at',[$begin,$end])
+            ->orderByDesc("id")->get();
         return view('backend.transaction', [
             'route'=>"transaction",
-            'transactions'=>$transactions
+            'transactions'=>$transactions,
+            'end_date'=>$end,
+            'begin_date'=>$begin
         ]);
     }
     public function transaction_detail(Request $request,$id)

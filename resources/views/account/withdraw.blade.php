@@ -8,7 +8,7 @@
 
             <div class="payment__cart__check">
                 <h3 class="balance">
-                    Balance: € 0.00
+                    Balance:  {{$user->sold}} FCFA
                 </h3>
                 <div class="row g-4 text-white">
                     <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-6">

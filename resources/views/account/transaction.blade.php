@@ -7,30 +7,32 @@
     <div class="">
         <div class="custom_card">
             <div class="cainoform__wrap">
-                <div class="row g-4">
-                    <div class="col-xl-6">
-                        <div class="casino__date">
-                            <h4 class="f__title">
-                                From
-                            </h4>
-                            <div class="calender-bar">
-                                <input type="text" class="datepicker" placeholder="2023-2-2">
-                                <i class="icon-calender"></i>
+                <form id="mygame_form">
+                    <div class="row g-4">
+                        <div class="col-xl-6">
+                            <div class="casino__date">
+                                <h4 class="f__title">
+                                    From
+                                </h4>
+                                <div class="calender-bar">
+                                    <input name="date_begin" value="{{$begin_date}}" type="text" class="datepicker" placeholder="2023-2-2">
+                                    <i class="icon-calender"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="casino__date">
+                                <h4 class="f__title">
+                                    Until
+                                </h4>
+                                <div class="calender-bar">
+                                    <input name="date_end" value="{{$end_date}}" type="text" class="datepicker" id="myform_game_input" placeholder="2023-2-2">
+                                    <i class="icon-calender"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="casino__date">
-                            <h4 class="f__title">
-                                Until
-                            </h4>
-                            <div class="calender-bar">
-                                <input type="text" class="datepicker" placeholder="2023-2-2">
-                                <i class="icon-calender"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="casinoform__tabe">
                 <table>

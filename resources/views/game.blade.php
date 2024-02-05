@@ -96,7 +96,7 @@
                         @if($is_then==1)
                             <a class="btn btn-outline-primary btn-lg btn-block" href="{{route("resultat",['id'=>$lotto->id])}}"> Results</a>
                         @else
-                            <a class="btn btn-outline-success btn-lg btn-block" id="send_conbinaiso" onclick="lotto.sendLottery()"><i class="fa fa-spinner fa-spin" id="spinner_send"></i> Send</a>
+                            <a class="btn btn-outline-success btn-lg btn-block" id="send_conbinaiso" onclick="lotto.sendLottery()"><i class="fa fa-spinner fa-spin" id="spinner_send"></i> Send with {{env("PRICE_GAME")}} FCFA</a>
                         @endif
                     </div>
                 </div>

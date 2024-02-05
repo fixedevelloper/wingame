@@ -155,7 +155,7 @@ class FrontController extends Controller
         if (is_null($user)){
             return response("User not logged",403);
         }
-        if (is_null($user->sold>1)){
+        if ($user->sold<env("PRICE_GAME")){
             return response("Amount not set",403);
         }
         $game=new GamePlay();
@@ -170,7 +170,7 @@ class FrontController extends Controller
             $item->loto_fixture_item_id=$ob[$i]['id'];
             $item->save();
         }
-        $user->sold-=1;
+        $user->sold-=env("PRICE_GAME");
         $user->save();
         return response()->json($ob);
     }

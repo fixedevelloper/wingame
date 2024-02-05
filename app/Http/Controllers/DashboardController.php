@@ -64,36 +64,44 @@ class DashboardController extends Controller
     }
     public function withdraw(Request $request)
     {
+        $user=Auth::user();
         return view('account.withdraw', [
-            'route'=>"withdraw"
+            'route'=>"withdraw",
+            'user'=>$user
         ]);
     }
     public function transaction(Request $request)
     {
         $user=Auth::user();
-        if ($request->method()=="post"){
-
+        if (is_null($request->get('date_end'))) {
+            $begin = Carbon::today()->format('Y-m-d');
+            $end = Carbon::today()->addDays(1)->format("Y-m-d");
+        } else {
+            $begin = $request->get('date_begin');
+            $end = $request->get('date_end');
         }
-        $transactions=Transaction::query()->where(['user_id'=>$user->id])->get();
+        $transactions=Transaction::query()->where(['user_id'=>$user->id])
+            ->whereBetween('created_at',[$begin,$end])->get();
         return view('account.transaction', [
             'route'=>"transaction",
-            'transactions'=>$transactions
+            'transactions'=>$transactions,
+            'end_date'=>$end,
+            'begin_date'=>$begin
         ]);
     }
     public function myGame(Request $request)
     {
         if (is_null($request->get('date'))) {
             $date_ = Carbon::today()->format('Y-m-d');
-            $timestamp = Carbon::today()->addDays(1)->format("y-m-d h:i");
+            $timestamp = Carbon::today()->addDays(1)->format("Y-m-d h:i");
         } else {
             $date_ = $request->get('date');
-            $timestamp = Carbon::parse($date_)->addDays(1)->format("y-m-d h:i");
+            $timestamp = Carbon::parse($date_)->addDays(1)->format("Y-m-d h:i");
         }
-        $address=Session::get("address_connect");
-        $user=User::query()->firstWhere(['address'=>$address]);
+        $user=Auth::user();
         $mygames=GamePlay::query()->where(['user_id'=>$user->id])->whereBetween('created_at',[$date_,$timestamp])->get();
         return view('account.mygame', [
-            "address"=>$address,
+            "user"=>$user,
             'mygames'=>$mygames,
             'route'=>"mygame",
             'date'=>$date_

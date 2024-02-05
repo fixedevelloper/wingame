@@ -71,11 +71,16 @@
 
 
             <!--Main js-->
+<script src="{{asset('js/main.js')}}"></script>
             <script src="{{ asset('lottoJs/lotterie.js') }}"></script>
             <script>
-                $('#myform_game_input').change(function () {
-                    $('#mygame_form').submit()
+                $(function () {
+
+                    $('#myform_game_input').change(function () {
+                        $('#mygame_form').submit()
+                    })
                 })
+
                 var configs = {
                     routes: {
                         index: "{{\Illuminate\Support\Facades\URL::to('/')}}",

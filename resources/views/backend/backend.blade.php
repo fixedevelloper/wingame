@@ -73,7 +73,9 @@
 <script src="{{ asset('lottoJs/lotterie.js') }}"></script>
 <script>
                 $(function () {
-
+                    $('#myform_game_input').change(function () {
+                        $('#mygame_form').submit()
+                    })
                     $('#grille_date').change(function () {
                         $('#form_grille').submit()
                     })

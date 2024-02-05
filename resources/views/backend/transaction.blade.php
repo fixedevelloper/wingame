@@ -7,30 +7,33 @@
     <div class="">
         <div class="custom_card">
             <div class="cainoform__wrap">
-                <div class="row g-4">
-                    <div class="col-xl-6">
-                        <div class="casino__date">
-                            <h4 class="f__title">
-                                From
-                            </h4>
-                            <div class="calender-bar">
-                                <input type="text" class="datepicker" placeholder="2023-2-2">
-                                <i class="icon-calender"></i>
+                <form id="mygame_form">
+                    <div class="row g-4">
+                        <div class="col-xl-6">
+                            <div class="casino__date">
+                                <h4 class="f__title">
+                                    From
+                                </h4>
+                                <div class="calender-bar">
+                                    <input value="{{$begin_date}}" name="date_begin" type="text" class="datepicker" placeholder="2023-2-2">
+                                    <i class="icon-calender"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="casino__date">
+                                <h4 class="f__title">
+                                    Until
+                                </h4>
+                                <div class="calender-bar">
+                                    <input value="{{$begin_date}}" name="date_end" type="text" class="datepicker" id="myform_game_input" placeholder="2023-2-2">
+                                    <i class="icon-calender"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="casino__date">
-                            <h4 class="f__title">
-                                Until
-                            </h4>
-                            <div class="calender-bar">
-                                <input type="text" class="datepicker" placeholder="2023-2-2">
-                                <i class="icon-calender"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
+
             </div>
             <div class="casinoform__tabe">
                 <table>
@@ -55,14 +58,6 @@
                         <td class="bold"><a class="btn btn-outline-primary btn-sm" href="{{route("admin.transaction_detail",['id'=>$transaction->id])}}">Detail</a></td>
                     </tr>
                     @endforeach
-            {{--        <tr>
-                        <td>Withdraw</td>
-                        <td>Credit Card</td>
-                        <td>4,591 USD</td>
-                        <td class="pending">Pending</td>
-                        <td>2.70</td>
-                        <td class="bold">...</td>
-                    </tr>--}}
                     </tbody>
                 </table>
             </div>
