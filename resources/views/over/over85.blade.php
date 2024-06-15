@@ -31,9 +31,13 @@
                             <tr>
                                 <td></td>
                                 <td>
+                                    <img width="50" height="20" src="{!! $fixture->team_home_logo !!}"
+                                    >
                                     {!! $fixture->team_home_name !!}
                                 </td>
                                 <td>
+                                    <img width="50" height="50" src="{!! $fixture->team_away_logo !!}"
+                                    >
                                     {!! $fixture->team_away_name !!}
                                 </td>
                                 <td>
@@ -47,66 +51,7 @@
                             </tr>
                         </tbody>
                     </table>
-
-
-                    {{--   <div class="height__table">
-                           <div class="main__table">
-                               <div class="table__wrap">
-                               <div class="table__items b__bottom">
-                                   <div class="t__items">
-                                       <div class="t__items__left text-end">
-                                           <h6>
-                                               <img height="40"
-                                                    src="{{asset("images/ballon-football-enveloppe-flammes-bleues-fumee-noire.jpg")}}">
-                                               Real madrid
-                                           </h6>
-                                       </div>
-
-                                   </div>
-                                   <div class="mart__point__items">
-                                       <a href="javascript:void(0);" class="point__box">
-                                           <input type="checkbox" name="fixure" value="1" id="check1">
-                                           <label for="check1">
-                                               <span class="break">1</span>
-                                               <div><i class="fa fa-check"></i></div>
-                                           </label>
-
-                                       </a>
-                                       <a href="javascript:void(0);" class="point__box">
-                                           <input type="checkbox" name="fixure" value="3" id="check3">
-                                           <label for="check3">
-                                               <span class="break">x</span>
-                                               <div>   <i class="fa fa-check"></i></div>
-                                           </label>
-
-                                       </a>
-                                       <a href="javascript:void(0);" class="point__box">
-                                           <input type="checkbox" name="fixure" value="2" id="check2">
-                                           <label for="check2">
-                                               <span class="break">2</span>
-                                               <div><i class="fa fa-check"></i></div>
-                                           </label>
-
-                                       </a>
-                                   </div>
-                                   <div class="t__items">
-                                       <div class="t__items__left">
-                                           <h6>
-                                               <img height="40"
-                                                    src="{{asset("images/ballon-football-enveloppe-flammes-bleues-fumee-noire.jpg")}}">
-                                               Real madrid
-                                           </h6>
-                                       </div>
-
-                                   </div>
-                               </div>
-                               </div>
-                           </div>
-
-                       </div>
-                       <div class="d-grid gap-2 mt-3">
-                           <a class="btn btn-outline-success btn-lg btn-block"> Valider</a>
-                       </div>--}}
+                    {{$fixtures->links()}}
                 </div>
             </div>
         </div>

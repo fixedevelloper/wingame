@@ -49,7 +49,7 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-         $data = OverFixture::query()->where(['over_type'=>"OVER_55",'date'=>$date_])->orderByDesc('id')->limit(20)->get();
+         $data = OverFixture::query()->where(['over_type'=>"OVER_55",'date'=>$date_])->orderByDesc('id')->paginate(20);
         return view('over.over55', [
             "fixtures" => $data,
             'date' => $date_
@@ -64,7 +64,7 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-        $data = OverFixture::query()->where(['over_type'=>"OVER_65",'date'=>$date_])->orderByDesc('id')->limit(20)->get();
+        $data = OverFixture::query()->where(['over_type'=>"OVER_65",'date'=>$date_])->orderByDesc('id')->paginate(20);
         return view('over.over65', [
             "fixtures" => $data,
             'date' => $date_
@@ -79,7 +79,7 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-        $data = OverFixture::query()->where(['over_type'=>"OVER_75",'date'=>$date_])->orderByDesc('id')->limit(20)->get();
+        $data = OverFixture::query()->where(['over_type'=>"OVER_75",'date'=>$date_])->orderByDesc('id')->paginate(20);
         return view('over.over75', [
             "fixtures" => $data,
             'date' => $date_
@@ -94,7 +94,7 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-        $data = OverFixture::query()->where(['over_type'=>"OVER_85",'date'=>$date_])->orderByDesc('id')->limit(20)->get();
+        $data = OverFixture::query()->where(['over_type'=>"OVER_85",'date'=>$date_])->orderByDesc('id')->paginate(20);
         return view('over.over85', [
             "fixtures" => $data,
             'date' => $date_
