@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:load-fixture')->everyThreeMinutes();
+        $schedule->command('app:create-fixture')->everySixHours();
+        $schedule->command('app:load-over')->everySixHours();
     }
 
     /**

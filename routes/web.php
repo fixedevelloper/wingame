@@ -29,6 +29,14 @@ Route::match(['POST','GET'],'/post_game', [FrontController::class, 'postGame'])
     ->name('postGame');
 Route::get('/', [FrontController::class, 'home'])
     ->name('home');
+Route::get('/over5_5', [FrontController::class, 'over5_5'])
+    ->name('over5_5');
+Route::get('/over6_5', [FrontController::class, 'over6_5'])
+    ->name('over6_5');
+Route::get('/over7_5', [FrontController::class, 'over7_5'])
+    ->name('over7_5');
+Route::get('/over8_5', [FrontController::class, 'over8_5'])
+    ->name('over8_5');
 Route::get('/game/{id}', [FrontController::class, 'game'])
     ->name('game');
 Route::get('/resultat/{id}', [FrontController::class, 'resultat'])

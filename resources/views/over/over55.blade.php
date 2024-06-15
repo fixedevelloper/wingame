@@ -1,103 +1,53 @@
 @extends('over.base_over')
 @section('title')  @endsection
 @push("scripts")
-    <style>
-        .game ol {
-            list-style: none;
-            counter-reset: list;
-            padding: 0 1rem;
-        }
 
-        .game li {
-            --stop: calc(100% / var(--length) * var(--i));
-            --l: 62%;
-            --l2: 88%;
-            --h: calc((var(--i) - 1) * (180 / var(--length)));
-            --c1: hsl(var(--h), 71%, var(--l));
-            --c2: hsl(var(--h), 71%, var(--l2));
-
-            position: relative;
-            counter-increment: list;
-            max-width: 45rem;
-            margin: 0.5rem auto;
-            padding: 1rem 1rem 1rem;
-            box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
-            border-radius: 0.25rem;
-            overflow: hidden;
-            background-color: white;
-        }
-
-        .game li::before {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 1rem;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: linear-gradient(to right, var(--c1) var(--stop), var(--c2) var(--stop));
-        }
-
-        .game h3 {
-            display: flex;
-            align-items: baseline;
-            margin: 0 0 1rem;
-            color: rgb(70 70 70);
-        }
-
-        .game h3::before {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 0 0 auto;
-            margin-right: 1rem;
-            width: 2rem;
-            height: 2rem;
-            content: counter(list);
-            padding: 1rem;
-            border-radius: 50%;
-            background-color: var(--c1);
-            color: white;
-        }
-
-        @media (min-width: 40em) {
-            .game li {
-                margin: 1rem auto;
-                padding: 2rem 1rem 1rem;
-            }
-
-            .game h3 {
-                font-size: 1.25rem;
-                margin: 0 0 2rem;
-            }
-
-            .game h3::before {
-                margin-right: 1.5rem;
-            }
-        }
-    </style>
 @endpush
 @section('content')
 
     <div class="row container">
-
+<h4> Fixtures Over 5.5</h4>
 </div>
     <div class="row justify-content-center">
-        <div class="col-md-6 mt-5">
+        <div class="col-md-8 mt-5">
             <div class="card card_dark">
                 <div class="card-body game">
-
-                        <ol style="--length: {{sizeof($lotto_fixtures)}}" role="list">
-                        @foreach($lotto_fixtures as $lotto_fixture)
-
-                                <a href="{{route('game',["id"=>$lotto_fixture->id])}}">
-                                    <li style="--i: {{$loop->index}}">
-                                    <h3>{{$lotto_fixture->title}} of {{\Carbon\Carbon::parse($lotto_fixture->end_time)->format("d/m/Y")}}</h3>
-                                    <p class="text-black-50">End of validation : {{$lotto_fixture->end_time}}</p>
-                                    </li>
-                                </a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Team H</th>
+                            <th>Team A</th>
+                            <th>Over</th>
+                            <th>Score</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($fixtures as $lotto_fixture)
+                            @php
+                            $fixture=\App\Helpers\Helpers::getFixture($lotto_fixture->fixture_id)
+                            @endphp
+                        <tr>
+                            <td></td>
+                            <td>
+                                {!! $fixture->team_home_name !!}
+                            </td>
+                            <td>
+                                {!! $fixture->team_away_name !!}
+                            </td>
+                            <td>
+                                {!! $lotto_fixture->value !!}
+                            </td>
+                            <td>
+                                {!! $fixture->score_ft_home !!} -  {!! $fixture->score_ft_away !!}
+                            </td>
+                            <td></td>
                             @endforeach
-                        </ol>
+                        </tr>
+                        </tbody>
+                    </table>
+
 
                  {{--   <div class="height__table">
                         <div class="main__table">

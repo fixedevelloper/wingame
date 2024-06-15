@@ -67,7 +67,7 @@ class Helpers
     static function getFixture($fixture_id)
     {
         $fixture=Fixture::query()->firstWhere(['fixture_id'=>$fixture_id]);
-      //  $team_home = Team::query()->firstWhere(['team_id' => $team_id]);
+
         return $fixture;
     }
     static function getLottofixtureItem($fixture_id)

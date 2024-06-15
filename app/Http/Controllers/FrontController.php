@@ -11,6 +11,7 @@ use App\Models\GamePlay;
 use App\Models\League;
 use App\Models\LottoFixture;
 use App\Models\LottoFixtureItem;
+use App\Models\OverFixture;
 use App\Models\PlayingFixture;
 use App\Models\Team;
 use App\Models\User;
@@ -24,8 +25,82 @@ use Illuminate\Support\Facades\Session;
 
 class FrontController extends Controller
 {
-
     public function home(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+       // $data = LottoFixture::query()->orderByDesc('id')->limit(5)->get();
+        return view('home', [
+            "lotto_fixtures" => [],
+            'date' => $date_
+        ]);
+    }
+    public function over5_5(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+         $data = OverFixture::query()->where(['over_type'=>"OVER_55",'date'=>$date_])->orderByDesc('id')->limit(20)->get();
+        return view('over.over55', [
+            "fixtures" => $data,
+            'date' => $date_
+        ]);
+    }
+    public function over6_5(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+        $data = OverFixture::query()->where(['over_type'=>"OVER_65",'date'=>$date_])->orderByDesc('id')->limit(20)->get();
+        return view('over.over65', [
+            "fixtures" => $data,
+            'date' => $date_
+        ]);
+    }
+    public function over7_5(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+        $data = OverFixture::query()->where(['over_type'=>"OVER_75",'date'=>$date_])->orderByDesc('id')->limit(20)->get();
+        return view('over.over75', [
+            "fixtures" => $data,
+            'date' => $date_
+        ]);
+    }
+    public function over8_5(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+        $data = OverFixture::query()->where(['over_type'=>"OVER_85",'date'=>$date_])->orderByDesc('id')->limit(20)->get();
+        return view('over.over85', [
+            "fixtures" => $data,
+            'date' => $date_
+        ]);
+    }
+   /* public function home(Request $request)
     {
         if (is_null($request->get('date'))) {
             $date_ = Carbon::today()->format('Y-m-d');
@@ -39,7 +114,7 @@ class FrontController extends Controller
             "lotto_fixtures" => $data,
             'date' => $date_
         ]);
-    }
+    }*/
     public function game(Request $request,$id)
     {
         $user=Auth::user();

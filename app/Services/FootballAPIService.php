@@ -56,13 +56,15 @@ class FootballAPIService
      * @return mixed
      * @throws GuzzleException
      */
-    static function getAllFixturesBetweenDate($from,$to){
+    static function getAllFixturesBetweenDate($from){
         $options=[
+            'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
+            'x-rapidapi-key' => env("APIFOOT_KEY")
         ];
         $client = new Client(['headers' => $options]);
-        $res = $client->request('GET', env("APIFOOT_KEY_URL").'/list_fixture',
-            ['query' => ["date"=> $from,'date_end' => $to]]);
-        return json_decode($res->getBody(),true);
+        $res = $client->request('GET', env("APIFOOT_KEY_URL").'/fixtures',
+            ['query' => ["date"=> $from]]);
+        return json_decode($res->getBody());
     }
     static function getAllFixturesBetweenDateWithLeague($league,$from,$to){
         $options=[
@@ -72,6 +74,16 @@ class FootballAPIService
         $client = new Client(['headers' => $options]);
         $res = $client->request('GET', env("APIFOOT_KEY_URL").'/fixtures',
             ['query' => [ "league"=> $league,'season' => '2023', "from"=> $from,'to' => $to]]);
+        return json_decode($res->getBody());
+    }
+    static function getAllFixturesBetweenDateAndBookmeker($from){
+        $options=[
+            'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
+            'x-rapidapi-key' => env("APIFOOT_KEY")
+        ];
+        $client = new Client(['headers' => $options]);
+        $res = $client->request('GET', env("APIFOOT_KEY_URL").'/odds',
+            ['query' => ["date"=> $from,'bookmaker' => 11,'bet'=>5]]);
         return json_decode($res->getBody());
     }
 
