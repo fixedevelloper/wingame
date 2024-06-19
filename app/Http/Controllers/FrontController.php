@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Models\Country;
+use App\Models\ExactScoreFixture;
 use App\Models\Fixture;
 use App\Models\GamePlay;
 use App\Models\League;
@@ -96,6 +97,21 @@ class FrontController extends Controller
         }
         $data = OverFixture::query()->where(['over_type'=>"OVER_85",'date'=>$date_])->orderByDesc('id')->paginate(20);
         return view('over.over85', [
+            "fixtures" => $data,
+            'date' => $date_
+        ]);
+    }
+    public function exactscore(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+        $data = ExactScoreFixture::query()->where(['date'=>$date_])->orderByDesc('id')->paginate(20);
+        return view('over.exactscore', [
             "fixtures" => $data,
             'date' => $date_
         ]);

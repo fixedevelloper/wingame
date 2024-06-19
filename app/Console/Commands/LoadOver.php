@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\ExactScoreFixture;
 use App\Models\Fixture;
 use App\Models\OverFixture;
 use App\Services\FootballAPIService;
@@ -34,7 +35,11 @@ class LoadOver extends Command
         $timestamp_ = Carbon::today()->addDays(1)->format('Y-m-d');
         $p_data=FootballAPIService::getAllFixturesBetweenDateAndBookmekerPage($date_);
         $paging=$p_data->paging->total;
-        logger($paging);
+       $this->createOver($paging,$date_);
+
+        $this->createExacteScore($paging,$date_);
+    }
+    function createOver($paging,$date_){
         for ($j=1; $j<=$paging; $j++){
             $data=FootballAPIService::getAllFixturesBetweenDateAndBookmeker($date_,$j);
             $response=$data->response;
@@ -81,6 +86,99 @@ class LoadOver extends Command
 
             }
         }
+    }
+    function createExacteScoreInit($page,$date_){
+        for ($j=1; $j<=$page; $j++){
+            $data=FootballAPIService::getAllFixturesDateAndBookmekerBet10($date_,$j);
+            $response=$data->response;
+            for ($k = 0; $k < sizeof($response); $k++) {
+                $overFixture=ExactScoreFixture::query()->firstWhere(['fixture_id'=>$response[$k]->fixture->id]);
+                if (is_null($overFixture)){
+                    $bookmakers = $response[$k]->bookmakers[0]->bets[0]->values;
+                    for ($i=0;$i<sizeof($bookmakers);$i++){
+                        logger("******************************************");
+                        if ($bookmakers[$i]->value=="1:0" && $bookmakers[$i]->odd<=10){
+                            $odd_1_0=$bookmakers[$i]->odd;
+                            logger($bookmakers[$i]->odd);
+                            if ($bookmakers[$i]->value=="1:1" && $bookmakers[$i]->odd<=10){
+                                $odd_1_1=$bookmakers[$i]->odd;
+                                logger($bookmakers[$i]->odd);
+                                if ($bookmakers[$i]->value=="0:0" && $bookmakers[$i]->odd<=10){
+                                    $odd_0_0=$bookmakers[$i]->odd;
+                                    logger($bookmakers[$i]->odd);
+                                    if ($bookmakers[$i]->value=="0:1" && $bookmakers[$i]->odd<=10){
+                                        $odd_0_1=$bookmakers[$i]->odd;
+                                        logger($bookmakers[$i]->odd);
+                                        $over=new ExactScoreFixture();
+                                        $over->fixture_id=$response[$k]->fixture->id;
+                                        $over->value_0_0=$odd_0_0;
+                                        $over->value_0_1=$odd_0_1;
+                                        $over->value_1_0=$odd_1_0;
+                                        $over->value_1_1=$odd_1_1;
+                                        $over->date=$date_;
+                                       // $over->save();
+                                    }
+                                }
+                            }
 
+                        }
+
+                    }
+                }
+
+            }
+        }
+    }
+    function createExacteScore($page,$date_){
+        for ($j=1; $j<=$page; $j++){
+            $data=FootballAPIService::getAllFixturesDateAndBookmekerBet10($date_,$j);
+            $response=$data->response;
+            for ($k = 0; $k < sizeof($response); $k++) {
+                $overFixture=ExactScoreFixture::query()->firstWhere(['fixture_id'=>$response[$k]->fixture->id]);
+                if (is_null($overFixture)){
+                    $bookmakers = $response[$k]->bookmakers[0]->bets[0]->values;
+                    $count=0;
+                    $odd_1_0=null;
+                    $odd_1_1=null;
+                    $odd_0_0=null;
+                    $odd_0_1=null;
+                    for ($i=0;$i<sizeof($bookmakers);$i++){
+                        logger("******************************************");
+                        if ($bookmakers[$i]->value=="1:0" && $bookmakers[$i]->odd<=10){
+                            $odd_1_0=$bookmakers[$i]->odd;
+                            logger($bookmakers[$i]->odd);
+                            $count++;
+                        }
+                        if ($bookmakers[$i]->value=="1:1" && $bookmakers[$i]->odd<=10) {
+                            $odd_1_1 = $bookmakers[$i]->odd;
+                            logger($bookmakers[$i]->odd);
+                            $count++;
+                        }
+                        if ($bookmakers[$i]->value=="0:0" && $bookmakers[$i]->odd<=10){
+                            $odd_0_0=$bookmakers[$i]->odd;
+                            logger($bookmakers[$i]->odd);
+                            $count++;
+                        }
+                        if ($bookmakers[$i]->value=="0:1" && $bookmakers[$i]->odd<=10){
+                            $odd_0_1=$bookmakers[$i]->odd;
+                            logger($bookmakers[$i]->odd);
+                            $count++;
+                        }
+                    }
+                    if ($count>3){
+                        $over=new ExactScoreFixture();
+                        $over->fixture_id=$response[$k]->fixture->id;
+                        $over->value_0_0=$odd_0_0;
+                        $over->value_0_1=$odd_0_1;
+                        $over->value_1_0=$odd_1_0;
+                        $over->value_1_1=$odd_1_1;
+                        $over->date=$date_;
+                        $over->save();
+                    }
+
+                }
+
+            }
+        }
     }
 }

@@ -48,6 +48,11 @@
 
                         </ul><!-- .nk-menu-sub -->
                     </li>
+                    <li class="nk-menu-item">
+                        <a href="{!! route('exactscore') !!}" class="nk-menu-link">
+                            <span class="nk-menu-text">Score exactes</span>
+                        </a>
+                    </li>
                 </ul><!-- .nk-menu -->
             </div><!-- .nk-header-menu -->
             <div class="nk-header-tools">

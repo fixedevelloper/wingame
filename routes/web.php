@@ -37,6 +37,8 @@ Route::get('/over7_5', [FrontController::class, 'over7_5'])
     ->name('over7_5');
 Route::get('/over8_5', [FrontController::class, 'over8_5'])
     ->name('over8_5');
+Route::get('/exactscore', [FrontController::class, 'exactscore'])
+    ->name('exactscore');
 Route::get('/game/{id}', [FrontController::class, 'game'])
     ->name('game');
 Route::get('/resultat/{id}', [FrontController::class, 'resultat'])
