@@ -7,6 +7,11 @@
 
     <div class="row container">
         <h4> Score exactes</h4>
+        <div class="col-3 float-end">
+            <form id="form_grille">
+                <input name="date"  type="date" value="{{$date}}" class="form-control m-2" id="grille_date">
+            </form>
+        </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8 mt-5">
@@ -22,7 +27,7 @@
                             <th>Cote (1-0)</th>
                             <th>Cote (1-1)</th>
                             <th>Cote (0-1)</th>
-                            <th></th>
+                            <th>Score</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -54,7 +59,9 @@
                                 <td>
                                     {!! $lotto_fixture->value_0_1 !!}
                                 </td>
-                                <td></td>
+                                <td>
+                                    {!! $fixture->score_ft_home !!} -  {!! $fixture->score_ft_away !!}
+                                </td>
                                 @endforeach
                             </tr>
                         </tbody>

@@ -7,6 +7,11 @@
 
     <div class="row container">
         <h4> Fixtures Over 7.5</h4>
+        <div class="col-3 float-end">
+            <form id="form_grille">
+                <input name="date"  type="date" value="{{$date}}" class="form-control m-2" id="grille_date">
+            </form>
+        </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8 mt-5">
