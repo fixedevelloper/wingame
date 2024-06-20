@@ -113,7 +113,7 @@ class FootballAPIService
         ];
         $client = new Client(['headers' => $options]);
         $res = $client->request('GET', env("APIFOOT_KEY_URL").'/fixtures/headtohead',
-            ['query' => ["h2h"=> $home.'-'.$away]]);
+            ['query' => ["h2h"=> $home.'-'.$away,"last"=>5]]);
         return json_decode($res->getBody());
     }
 }

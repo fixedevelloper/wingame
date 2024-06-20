@@ -35,9 +35,9 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{!! $v_h !!}</td>
-                            <td>{!! $other !!}</td>
-                            <td>{!! $v_a !!}</td>
+                            <td>{!! $v_h !!} ({!! round(($v_h/5)*100,2) !!} %)</td>
+                            <td>{!! $other !!} ({!! round(($other/5)*100,2) !!} %)</td>
+                            <td>{!! $v_a !!} ({!! round(($v_a/5)*100,2) !!} %)</td>
                         </tr>
                         </tbody>
                     </table>
