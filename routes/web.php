@@ -29,6 +29,8 @@ Route::match(['POST','GET'],'/post_game', [FrontController::class, 'postGame'])
     ->name('postGame');
 Route::get('/', [FrontController::class, 'home'])
     ->name('home');
+Route::get('/detail_fixture/{id}', [FrontController::class, 'detail_fixture'])
+    ->name('detail_fixture');
 Route::get('/over5_5', [FrontController::class, 'over5_5'])
     ->name('over5_5');
 Route::get('/over6_5', [FrontController::class, 'over6_5'])

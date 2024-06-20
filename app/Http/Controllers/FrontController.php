@@ -35,10 +35,55 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-       // $data = LottoFixture::query()->orderByDesc('id')->limit(5)->get();
+        $data = Fixture::query()->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);
         return view('home', [
-            "lotto_fixtures" => [],
+            "fixtures" => $data,
             'date' => $date_
+        ]);
+    }
+    public function detail_fixture(Request $request,$id)
+    {
+        $fixture=Fixture::query()->find($id);
+        $dataH2H=FootballAPIService::getAllFixturesHtoH($fixture->team_home_id,$fixture->team_away_id);
+        $response = $dataH2H->response;
+        $v_h=0;
+        $v_a=0;
+        $over_05=0;$over_15=0;$over_25=0;$over_35=0;$over_45=0;
+        for ($i = 0; $i < sizeof($response); $i++) {
+            if ($response[$i]->teams->home->winner){
+                $v_h+=1;
+            }
+            if ($response[$i]->teams->away->winner){
+                $v_a+=1;
+            }
+            if (($response[$i]->goals->home+$response[$i]->goals->away)>0.5){
+                $over_05+=1;
+            }
+            if (($response[$i]->goals->home+$response[$i]->goals->away)>1.5){
+                $over_15+=1;
+            }
+            if (($response[$i]->goals->home+$response[$i]->goals->away)>2.5){
+                $over_25+=1;
+            }
+            if (($response[$i]->goals->home+$response[$i]->goals->away)>3.5){
+                $over_35+=1;
+            }
+            if (($response[$i]->goals->home+$response[$i]->goals->away)>4.5){
+                $over_45+=1;
+            }
+        }
+        return view('deatl_fixture', [
+           "fixture"=> $fixture,
+            "over_05"=>$over_05,
+            "over_15"=>$over_15,
+            "over_25"=>$over_25,
+            "over_35"=>$over_35,
+            "over_45"=>$over_45,
+            "v_h"=>$v_h,
+            "v_a"=>$v_a,
+            "other"=>sizeof($response)-($v_a+$v_h),
+            "response"=>$response
+
         ]);
     }
     public function over5_5(Request $request)
@@ -50,7 +95,8 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-         $data = OverFixture::query()->where(['over_type'=>"OVER_55",'date'=>$date_])->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);
+         $data = OverFixture::query()->where(['over_type'=>"OVER_55",'date'=>$date_])->orderByDesc('id')
+             ->paginate(20)->appends(['date'=>$date_]);
         return view('over.over55', [
             "fixtures" => $data,
             'date' => $date_
