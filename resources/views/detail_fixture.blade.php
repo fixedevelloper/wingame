@@ -66,7 +66,7 @@
             </div>
             <div class="card card_dark">
                 <div class="card-header">
-                    <h4>Confrontations a domicile</h4>
+                    <h4>Confrontations</h4>
                 </div>
                 <div class="card-body game">
                     <table class="table table-bordered">
@@ -81,10 +81,10 @@
                         <tbody>
                         @foreach($response as  $item))
                         <tr>
-                            <td>{!! \Carbon\Carbon::parse($item->date)->format("Y-m-d") !!}</td>
-                            <td><img src="{!! $item->team_home_logo !!}" width="50" height="40"> {!! $item->team_home_name !!}</td>
-                            <td><img src="{!! $item->team_away_logo !!}" width="50" height="40">{!! $item->team_away_name !!}</td>
-                            <td>{!!  $item->score_ft_home !!} - {!!  $item->score_ft_away !!} </td>
+                            <td>{!! \Carbon\Carbon::parse($response[$i]->fixture->date)->format("Y-m-d") !!}</td>
+                            <td><img src="{!! $response[$i]->teams->home->logo !!}" width="50" height="40"> {!! $response[$i]->teams->home->name !!}</td>
+                            <td><img src="{!! $response[$i]->teams->away->logo !!}" width="50" height="40">{!! $response[$i]->teams->away->name !!}</td>
+                            <td>{!!  $response[$i]->score->fulltime->home !!} - {!!  $response[$i]->score->fulltime->away !!} </td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -96,4 +96,10 @@
     </div>
 @endsection
 @push("script")
-
+    <script>
+        jQuery(window).on('load',function () {
+            'use strict';
+            lotto.getBalance();
+        });
+    </script>
+@endpush

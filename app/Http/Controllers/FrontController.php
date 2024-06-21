@@ -44,6 +44,50 @@ class FrontController extends Controller
     public function detail_fixture(Request $request,$id)
     {
         $fixture=Fixture::query()->find($id);
+        $dataH2H=Fixture::query()->where(['team_home_id'=>$fixture->team_home_id])->orderByDesc('date')->get(5);
+        $v_h=0;
+        $v_a=0;
+        $over_05=0;$over_15=0;$over_25=0;$over_35=0;$over_45=0;
+       foreach ($dataH2H as $item){
+            if ($item->team_home_winner){
+                $v_h+=1;
+            }
+            if ($item->team_away_winner){
+                $v_a+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>0.5){
+                $over_05+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>1.5){
+                $over_15+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>2.5){
+                $over_25+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>3.5){
+                $over_35+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>4.5){
+                $over_45+=1;
+            }
+        }
+        return view('deatl_fixture', [
+           "fixture"=> $fixture,
+            "over_05"=>$over_05,
+            "over_15"=>$over_15,
+            "over_25"=>$over_25,
+            "over_35"=>$over_35,
+            "over_45"=>$over_45,
+            "v_h"=>$v_h,
+            "v_a"=>$v_a,
+            "other"=>sizeof($dataH2H)-($v_a+$v_h),
+            "response"=>$dataH2H
+
+        ]);
+    }
+    public function detail_fixtureHTH(Request $request,$id)
+    {
+        $fixture=Fixture::query()->find($id);
         $dataH2H=FootballAPIService::getAllFixturesHtoH($fixture->team_home_id,$fixture->team_away_id);
         $response = $dataH2H->response;
         $v_h=0;
@@ -73,7 +117,7 @@ class FrontController extends Controller
             }
         }
         return view('deatl_fixture', [
-           "fixture"=> $fixture,
+            "fixture"=> $fixture,
             "over_05"=>$over_05,
             "over_15"=>$over_15,
             "over_25"=>$over_25,
