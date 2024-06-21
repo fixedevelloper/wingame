@@ -35,9 +35,9 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{!! $v_h !!} ({!! round(($v_h/sizeof($dataH2H))*100,2) !!} %)</td>
-                            <td>{!! $other !!} ({!! round(($other/sizeof($dataH2H))*100,2) !!} %)</td>
-                            <td>{!! $v_a !!} ({!! round(($v_a/sizeof($dataH2H))*100,2) !!} %)</td>
+                            <td>{!! $v_h !!} ({!! round(($v_h/sizeof($response))*100,2) !!} %)</td>
+                            <td>{!! $other !!} ({!! round(($other/sizeof($response))*100,2) !!} %)</td>
+                            <td>{!! $v_a !!} ({!! round(($v_a/sizeof($response))*100,2) !!} %)</td>
                         </tr>
                         </tbody>
                     </table>
