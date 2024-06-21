@@ -29,7 +29,13 @@ class LoadFixture extends Command
     public function handle()
     {
         logger("---------step load-------------");
-
+        $from = date('Y-m-d');
+        $to=date('Y-m-d', strtotime($from. ' -600 days'));
+        logger($to);
+       $arrys= $this->arrayDate($to,$from);
+       for ($p=0;$p<sizeof($arrys);$p++){
+           $this->createFixtureDate($arrys[$p]);
+       }
     }
    function loadPropulse(){
        $date_ = Carbon::today()->format('Y-m-d');
@@ -71,12 +77,9 @@ class LoadFixture extends Command
            $fixture->save();
        }
    }
-    function createFixtureDate()
+    function createFixtureDate($from)
     {
-        //$leagues = League::query()->where('id', '>', 0)->get();
-        $from = date('Y-m-d');
-        //  $to=date('Y-m-d', strtotime($from. ' + 1 days'));
-        // foreach ($leagues as $league) {
+
         $data = FootballAPIService::getAllFixturesBetweenDate($from);
         $response = $data->response;
         for ($i = 0; $i < sizeof($response); $i++) {
@@ -117,5 +120,24 @@ class LoadFixture extends Command
             $fixture->score_pt_away = $response[$i]->score->penalty->away;
             $fixture->save();
         }
+    }
+    function arrayDate($date1,$date2){
+        // Declare an empty array
+            $array = array();
+
+// Use strtotime function
+        $Variable1 = strtotime($date1);
+        $Variable2 = strtotime($date2);
+
+// Use for loop to store dates into array
+// 86400 sec = 24 hrs = 60*60*24 = 1 day
+        for ($currentDate = $Variable1; $currentDate <= $Variable2;
+             $currentDate += (86400)) {
+
+            $Store = date('Y-m-d', $currentDate);
+            $array[] = $Store;
+        }
+       // logger($array);
+        return $array;
     }
 }
