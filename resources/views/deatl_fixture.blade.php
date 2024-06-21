@@ -30,14 +30,14 @@
                         <tr>
                             <th>V.{!! $fixture->team_home_name !!}</th>
                             <th>Match null</th>
-                            <th>V.{!! $fixture->team_away_name !!}</th>
+                            <th>V. Exterieur</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{!! $v_h !!} ({!! round(($v_h/5)*100,2) !!} %)</td>
-                            <td>{!! $other !!} ({!! round(($other/5)*100,2) !!} %)</td>
-                            <td>{!! $v_a !!} ({!! round(($v_a/5)*100,2) !!} %)</td>
+                            <td>{!! $v_h !!} ({!! round(($v_h/sizeof($dataH2H))*100,2) !!} %)</td>
+                            <td>{!! $other !!} ({!! round(($other/sizeof($dataH2H))*100,2) !!} %)</td>
+                            <td>{!! $v_a !!} ({!! round(($v_a/sizeof($dataH2H))*100,2) !!} %)</td>
                         </tr>
                         </tbody>
                     </table>
