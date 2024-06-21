@@ -79,7 +79,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($response as  $item))
+                        @foreach($response as  $item)
                         <tr>
                             <td>{!! \Carbon\Carbon::parse($item->date)->format("Y-m-d") !!}</td>
                             <td><img src="{!! $item->team_home_logo !!}" width="50" height="40"> {!! $item->team_home_name !!}</td>
@@ -95,5 +95,4 @@
         </div>
     </div>
 @endsection
-@push("script")
 
