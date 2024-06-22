@@ -44,7 +44,8 @@ class FrontController extends Controller
     public function detail_fixture(Request $request,$id)
     {
         $fixture=Fixture::query()->find($id);
-        $dataH2H=Fixture::query()->where(['team_home_id'=>$fixture->team_home_id])->orderByDesc('date')->limit(5)->get();
+        //$dataH2H=Fixture::query()->where(['team_home_id'=>$fixture->team_home_id])->orderByDesc('date')->limit(5)->get();
+        $dataH2H=Fixture::query()->where(['team_home_id'=>$fixture->team_home_id,'team_away_id'=>$fixture->team_away_id])->orderByDesc('date')->limit(5)->get();
         $v_h=0;
         $v_a=0;
         $over_05=0;$over_15=0;$over_25=0;$over_35=0;$over_45=0;
