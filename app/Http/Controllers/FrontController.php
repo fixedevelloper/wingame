@@ -35,7 +35,7 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-        $data = Fixture::query()->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);
+        $data = Fixture::query()->where(['date'=>$date_])->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);
         return view('home', [
             "fixtures" => $data,
             'date' => $date_
