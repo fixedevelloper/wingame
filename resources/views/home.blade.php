@@ -17,14 +17,15 @@
 
         @foreach($leagues as $league)
             @php
-               // $leag=\App\Helpers\Helpers::getLeague($league->league_id);
-                    $fixtures=\App\Helpers\Helpers::getFixtureByLeague($league->league_id,$date)
+                $leag=\App\Helpers\Helpers::getLeague($league->league_id);
+                  //  $fixtures=\App\Helpers\Helpers::getFixtureByLeague($league->league_id,$date)
+            $fixtures=[];
             @endphp
             <div class="card card-inner">
-              {{--  <div class="card-header" id="{!! $league->league_id !!}">
+                <div class="card-header" id="{!! $league->league_id !!}">
                     <img width="50" height="50" src="{!! $leag->logo !!}"
                     >{!! $leag->name !!}
-                </div>--}}
+                </div>
                 <div class="card-body">
                     @foreach($fixtures as $lotto_fixture)
                         @php
