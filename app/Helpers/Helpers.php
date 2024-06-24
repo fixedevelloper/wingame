@@ -85,7 +85,7 @@ class Helpers
     }
     static function getLeague($league_id)
     {
-        return League::query()->find($league_id);
+        return League::query()->firstWhere(['league_id'=>$league_id]);
     }
     static function getPlayingItem($game_id,$fixture_item_id)
     {
