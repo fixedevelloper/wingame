@@ -17,18 +17,18 @@
 
         @foreach($leagues as $league)
             @php
-                $leag=\App\Helpers\Helpers::getLeague($league->league_id);
+               // $leag=\App\Helpers\Helpers::getLeague($league->league_id);
                     $fixtures=\App\Helpers\Helpers::getFixtureByLeague($league->league_id,$date)
             @endphp
             <div class="card card-inner">
-                <div class="card-header" id="{!! $league->league_id !!}">
+              {{--  <div class="card-header" id="{!! $league->league_id !!}">
                     <img width="50" height="50" src="{!! $leag->logo !!}"
                     >{!! $leag->name !!}
-                </div>
+                </div>--}}
                 <div class="card-body">
                     @foreach($fixtures as $lotto_fixture)
                         @php
-                            $fixture=\App\Helpers\Helpers::getFixture($lotto_fixture->fixture_id)
+                          //  $fixture=\App\Helpers\Helpers::getFixture($lotto_fixture->fixture_id)
                         @endphp
                     <div class="row">
                         <div class="col-md-9">
@@ -67,7 +67,7 @@
             </div>
         @endforeach
         <div class="mt-4">
-           {{-- {{$leagues->links()}}--}}
+           {{$leagues->links()}}
         </div>
 
     </div>
