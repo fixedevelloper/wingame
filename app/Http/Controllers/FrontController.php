@@ -37,8 +37,8 @@ class FrontController extends Controller
         }
         $leagues = Fixture::query()->where(['day_timestamp'=>$timestamp])->select('league_id')
             ->distinct()->orderBy('league_id')->paginate(20)->appends(['date'=>$date_]);;
-        $data = Fixture::query()->where(['day_timestamp'=>$timestamp])
-           ->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);
+/*        $data = Fixture::query()->where(['day_timestamp'=>$timestamp])
+           ->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);*/
         return view('home', [
            // "fixtures" => $data,
             'date' => $date_,
