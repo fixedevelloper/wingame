@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="row container">
-        <h4> Score exactes</h4>
+        <h4> Match du Jours</h4>
         <div class="col-3 float-end">
             <form id="form_grille">
                 <input name="date"  type="date" value="{{$date}}" class="form-control m-2" id="grille_date">
@@ -18,8 +18,8 @@
         @foreach($leagues as $league)
             @php
                 $leag=\App\Helpers\Helpers::getLeague($league->league_id);
-                  //  $fixtures=\App\Helpers\Helpers::getFixtureByLeague($league->league_id,$date)
-            $fixtures=[];
+                    $fixtures=\App\Helpers\Helpers::getFixtureByLeague($league->league_id,$date)
+            //$fixtures=[];
             @endphp
             <div class="card card-inner">
                 <div class="card-header" id="{!! $league->league_id !!}">
@@ -28,9 +28,6 @@
                 </div>
                 <div class="card-body">
                     @foreach($fixtures as $lotto_fixture)
-                        @php
-                          //  $fixture=\App\Helpers\Helpers::getFixture($lotto_fixture->fixture_id)
-                        @endphp
                     <div class="row">
                         <div class="col-md-9">
                             <div class="row">
