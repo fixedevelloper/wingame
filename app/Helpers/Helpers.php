@@ -6,6 +6,7 @@ namespace App\Helpers;
 
 use App\Models\Fixture;
 use App\Models\GamePlay;
+use App\Models\League;
 use App\Models\LottoFixtureItem;
 use App\Models\Odd;
 use App\Models\PlayingFixture;
@@ -74,6 +75,17 @@ class Helpers
     {
         $fixtures=LottoFixtureItem::query()->where(['lotto_fixture_id'=>$fixture_id])->get();
         return $fixtures;
+    }
+    static function getFixtureByLeague($league_id,$date_)
+    {
+        $timestamp = Carbon::parse($date_)->getTimestamp();
+        $data = Fixture::query()->where(['day_timestamp'=>$timestamp,'league_id'=>$league_id])
+            ->orderByDesc('id')->get();
+        return $data;
+    }
+    static function getLeague($league_id)
+    {
+        return League::query()->find($league_id);
     }
     static function getPlayingItem($game_id,$fixture_item_id)
     {

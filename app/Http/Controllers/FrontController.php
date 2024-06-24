@@ -35,17 +35,25 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-        $data = Fixture::query()->where(['day_timestamp'=>$timestamp])->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);
+        $leagues = Fixture::query()->where(['day_timestamp'=>$timestamp])->select('league_id')
+            ->distinct()->orderBy('league_id')->paginate(20)->appends(['date'=>$date_]);;
+        $data = Fixture::query()->where(['day_timestamp'=>$timestamp])
+           ->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);
         return view('home', [
-            "fixtures" => $data,
-            'date' => $date_
+           // "fixtures" => $data,
+            'date' => $date_,
+            'leagues'=>$leagues
         ]);
     }
     public function detail_fixture(Request $request,$id)
     {
         $fixture=Fixture::query()->find($id);
-        //$dataH2H=Fixture::query()->where(['team_home_id'=>$fixture->team_home_id])->orderByDesc('date')->limit(5)->get();
-        $dataH2H=Fixture::query()->where(['team_home_id'=>$fixture->team_home_id,'team_away_id'=>$fixture->team_away_id])->orderByDesc('date')->limit(5)->get();
+        $dataLastHome=Fixture::query()->where(['team_home_id'=>$fixture->team_home_id])
+            ->where('day_timestamp','<',$fixture->day_timestamp)->orderByDesc('date')->limit(5)->get();
+        $dataLasAway=Fixture::query()->where(['team_away_id'=>$fixture->team_away_id])
+            ->where('day_timestamp','<',$fixture->day_timestamp)->orderByDesc('date')->limit(5)->get();
+        $dataH2H=Fixture::query()->where(['team_home_id'=>$fixture->team_home_id,'team_away_id'=>$fixture->team_away_id])
+            ->where('day_timestamp','<',$fixture->day_timestamp)->orderByDesc('date')->limit(5)->get();
         $v_h=0;
         $v_a=0;
         $over_05=0;$over_15=0;$over_25=0;$over_35=0;$over_45=0;
@@ -82,7 +90,9 @@ class FrontController extends Controller
             "v_h"=>$v_h,
             "v_a"=>$v_a,
             "other"=>sizeof($dataH2H)-($v_a+$v_h),
-            "response"=>$dataH2H
+            "response"=>$dataH2H,
+            'fixure_last_home'=>$dataLastHome,
+            'fixure_last_away'=>$dataLasAway,
 
         ]);
     }
