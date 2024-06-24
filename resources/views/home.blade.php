@@ -67,7 +67,7 @@
             </div>
         @endforeach
         <div class="mt-4">
-            {{$leagues->links()}}
+           {{-- {{$leagues->links()}}--}}
         </div>
 
     </div>
