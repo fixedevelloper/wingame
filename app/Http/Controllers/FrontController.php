@@ -42,7 +42,7 @@ class FrontController extends Controller
         return view('home', [
            // "fixtures" => $data,
             'date' => $date_,
-            'leagues'=>$leagues
+            'leagues'=>[]
         ]);
     }
     public function detail_fixture(Request $request,$id)
