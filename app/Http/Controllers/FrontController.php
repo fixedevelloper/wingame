@@ -56,12 +56,32 @@ class FrontController extends Controller
             ->where('day_timestamp','<',$fixture->day_timestamp)->orderByDesc('date')->limit(5)->get();
         $v_h=0;
         $v_a=0;
-        $over_05=0;$over_15=0;$over_25=0;$over_35=0;$over_45=0;
+        $v_h_a=0;
+        $v_a_a=0;
+        $v_h_l=0;
+        $v_a_l=0;
+        $over_05=0;
+        $over_15=0;
+        $over_25=0;
+        $over_35=0;
+        $over_45=0;
+
+        $over_05_a=0;
+        $over_15_a=0;
+        $over_25_a=0;
+        $over_35_a=0;
+        $over_45_a=0;
+
+        $over_05_l=0;
+        $over_15_l=0;
+        $over_25_l=0;
+        $over_35_l=0;
+        $over_45_l=0;
        foreach ($dataH2H as $item){
-            if ($item->team_home_winner){
+            if ($item->score_ft_home>$item->score_ft_away){
                 $v_h+=1;
             }
-            if ($item->team_away_winner){
+            if ($item->score_ft_home<$item->score_ft_away){
                 $v_a+=1;
             }
             if (($item->score_ft_away+$item->score_ft_home)>0.5){
@@ -80,6 +100,52 @@ class FrontController extends Controller
                 $over_45+=1;
             }
         }
+        foreach ($dataLastHome as $item){
+            if ($item->score_ft_home>$item->score_ft_away){
+                $v_h_l+=1;
+            }
+            if ($item->score_ft_home<$item->score_ft_away){
+                $v_a_l+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>0.5){
+                $over_05_l+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>1.5){
+                $over_15_l+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>2.5){
+                $over_25_l+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>3.5){
+                $over_35_l+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>4.5){
+                $over_45_l+=1;
+            }
+        }
+        foreach ($dataLasAway as $item){
+            if ($item->score_ft_home>$item->score_ft_away){
+                $v_h_a+=1;
+            }
+            if ($item->score_ft_home<$item->score_ft_away){
+                $v_a+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>0.5){
+                $over_05_a+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>1.5){
+                $over_15_a+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>2.5){
+                $over_25_a+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>3.5){
+                $over_35_a+=1;
+            }
+            if (($item->score_ft_away+$item->score_ft_home)>4.5){
+                $over_45_a+=1;
+            }
+        }
         return view('deatl_fixture', [
            "fixture"=> $fixture,
             "over_05"=>$over_05,
@@ -93,6 +159,23 @@ class FrontController extends Controller
             "response"=>$dataH2H,
             'fixure_last_home'=>$dataLastHome,
             'fixure_last_away'=>$dataLasAway,
+            "over_05_a"=>$over_05_a,
+            "over_15_a"=>$over_15_a,
+            "over_25_a"=>$over_25_a,
+            "over_35_a"=>$over_35_a,
+            "over_45_a"=>$over_45_a,
+            "v_h_a"=>$v_h_a,
+            "v_a_a"=>$v_a_a,
+            "other_a"=>sizeof($dataH2H)-($v_a_a+$v_h_a),
+
+            "over_05_l"=>$over_05_l,
+            "over_15_l"=>$over_15_l,
+            "over_25_l"=>$over_25_l,
+            "over_35_l"=>$over_35_l,
+            "over_45_l"=>$over_45_l,
+            "v_h_l"=>$v_h_l,
+            "v_a_l"=>$v_a_l,
+            "other_l"=>sizeof($dataH2H)-($v_a_l+$v_h_l),
 
         ]);
     }
