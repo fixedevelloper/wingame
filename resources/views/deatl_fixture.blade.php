@@ -218,9 +218,9 @@
                                         @if(sizeof($response)==0)
                                             <td colspan="3" class="text-center"> No data</td>
                                         @else
-                                            <td>{!! $v_h_l !!} ({!! round(($v_h_l/sizeof($response))*100,2) !!} %)</td>
-                                            <td>{!! $other_l !!} ({!! round(($other_l/sizeof($response))*100,2) !!} %)</td>
-                                            <td>{!! $v_a_l !!} ({!! round(($v_a_l/sizeof($response))*100,2) !!} %)</td>
+                                            <td>{!! $v_h_l !!} ({!! round(($v_h_l/sizeof($fixure_last_home))*100,2) !!} %)</td>
+                                            <td>{!! $other_l !!} ({!! round(($other_l/sizeof($fixure_last_home))*100,2) !!} %)</td>
+                                            <td>{!! $v_a_l !!} ({!! round(($v_a_l/sizeof($fixure_last_home))*100,2) !!} %)</td>
                                         @endif
                                     </tr>
                                     </tbody>
@@ -302,12 +302,12 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        @if(sizeof($response)==0)
+                                        @if(sizeof($fixure_last_away)==0)
                                             <td colspan="3" class="text-center"> No data</td>
                                         @else
-                                            <td>{!! $v_h_a !!} ({!! round(($v_h_a/sizeof($response))*100,2) !!} %)</td>
-                                            <td>{!! $other_a !!} ({!! round(($other_a/sizeof($response))*100,2) !!} %)</td>
-                                            <td>{!! $v_a_a !!} ({!! round(($v_a_a/sizeof($response))*100,2) !!} %)</td>
+                                            <td>{!! $v_h_a !!} ({!! round(($v_h_a/sizeof($fixure_last_away))*100,2) !!} %)</td>
+                                            <td>{!! $other_a !!} ({!! round(($other_a/sizeof($fixure_last_away))*100,2) !!} %)</td>
+                                            <td>{!! $v_a_a !!} ({!! round(($v_a_a/sizeof($fixure_last_away))*100,2) !!} %)</td>
                                         @endif
                                     </tr>
                                     </tbody>
