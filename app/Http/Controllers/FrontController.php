@@ -128,7 +128,7 @@ class FrontController extends Controller
                 $v_h_a+=1;
             }
             if ($item->score_ft_home<$item->score_ft_away){
-                $v_a+=1;
+                $v_a_a+=1;
             }
             if (($item->score_ft_away+$item->score_ft_home)>0.5){
                 $over_05_a+=1;
