@@ -166,7 +166,7 @@ class FrontController extends Controller
             "over_45_a"=>$over_45_a,
             "v_h_a"=>$v_h_a,
             "v_a_a"=>$v_a_a,
-            "other_a"=>sizeof($dataH2H)-($v_a_a+$v_h_a),
+            "other_a"=>sizeof($dataLasAway)-($v_a_a+$v_h_a),
 
             "over_05_l"=>$over_05_l,
             "over_15_l"=>$over_15_l,
@@ -175,7 +175,7 @@ class FrontController extends Controller
             "over_45_l"=>$over_45_l,
             "v_h_l"=>$v_h_l,
             "v_a_l"=>$v_a_l,
-            "other_l"=>sizeof($dataH2H)-($v_a_l+$v_h_l),
+            "other_l"=>sizeof($dataLastHome)-($v_a_l+$v_h_l),
 
         ]);
     }
