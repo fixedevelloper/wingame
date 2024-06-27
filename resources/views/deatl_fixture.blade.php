@@ -215,7 +215,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        @if(sizeof($response)==0)
+                                        @if(sizeof($fixure_last_home)==0)
                                             <td colspan="3" class="text-center"> No data</td>
                                         @else
                                             <td>{!! $v_h_l !!} ({!! round(($v_h_l/sizeof($fixure_last_home))*100,2) !!} %)</td>
