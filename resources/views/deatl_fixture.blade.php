@@ -123,7 +123,7 @@
                                     <tr>
                                         <th>V.{!! $fixture->team_home_name !!}</th>
                                         <th>Match null</th>
-                                        <th>V. Exterieur</th>
+                                        <th>V. {!! $fixture->team_away_name !!}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -295,9 +295,9 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>V.{!! $fixture->team_home_name !!}</th>
+                                        <th>V. Home</th>
                                         <th>Match null</th>
-                                        <th>V. Exterieur</th>
+                                        <th>V. {!! $fixture->team_away_name !!}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
