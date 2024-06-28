@@ -194,7 +194,7 @@ class FrontController extends Controller
         $fixts = Fixture::query()->where(['day_timestamp' => $timestamp])
             ->orderByDesc('id')->get();
         foreach ($fixts as $fixt){
-            $lasts=Fixture::query()->where(['team_home_id'=>$fixt->team_home_id])->limit(5);
+            $lasts=Fixture::query()->where(['team_home_id'=>$fixt->team_home_id])->orWhere(['team_away_id'=>$fixt->team_home_id])->limit(5);
             $count=0;
             foreach ($lasts as $last){
                 if ($last->goal_home<$last->goal_away){
