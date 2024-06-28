@@ -29,7 +29,7 @@ class LoadFixture extends Command
     public function handle()
     {
         logger("---------step load-------------");
-        $from = "2022-10-01";
+        $from = "2024-06-27";
         $to=date('Y-m-d', strtotime($from. ' -600 days'));
         logger($to);
        $arrys= $this->arrayDate($to,$from);
@@ -100,9 +100,9 @@ class LoadFixture extends Command
                 $fixture->date = $response[$i]->fixture->date;
                 $fixture->fixture_id = $response[$i]->fixture->id;
                 $fixture->day_timestamp = Carbon::parse(Carbon::parse($response[$i]->fixture->date)->format('y-m-d'))->getTimestamp();
-
+                $fixture->referee = is_null($response[$i]->fixture->referee) ? "" : $response[$i]->fixture->referee;
             }
-            $fixture->referee = is_null($response[$i]->fixture->referee) ? "" : $response[$i]->fixture->referee;
+
             $fixture->st_long = $response[$i]->fixture->status->long;
             $fixture->st_short = $response[$i]->fixture->status->short;
             $fixture->st_elapsed = is_null($response[$i]->fixture->status->elapsed) ? " " : $response[$i]->fixture->status->elapsed;

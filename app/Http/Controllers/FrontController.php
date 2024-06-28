@@ -201,7 +201,7 @@ class FrontController extends Controller
                     $count+=1;
                 }
             }
-            if ($count>3){
+            if ($count>0){
                 $data[]=$fixt;
             }
         }
