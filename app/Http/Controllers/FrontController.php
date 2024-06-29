@@ -210,7 +210,35 @@ class FrontController extends Controller
             'date' => $date_,
         ]);
     }
-
+    public function fixture__away_lost(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+        $data=[];
+        $fixts = Fixture::query()->where(['day_timestamp' => $timestamp])
+            ->orderByDesc('id')->get();
+        foreach ($fixts as $fixt){
+            $lasts=Fixture::query()->where(['team_away_id'=>$fixt->team_away_id])->orWhere(['team_home_id'=>$fixt->team_away_id])->limit(5)->get();
+            $count=0;
+            foreach ($lasts as $last){
+                if ($last->goal_home<$last->goal_away){
+                    $count+=1;
+                }
+            }
+            if ($count>3){
+                $data[]=$fixt;
+            }
+        }
+        return view('fixtuerelosthome', [
+            "fixtures" => $data,
+            'date' => $date_,
+        ]);
+    }
     public function detail_fixtureHTH(Request $request, $id)
     {
         $fixture = Fixture::query()->find($id);
