@@ -29,7 +29,7 @@ class LoadFixture extends Command
     public function handle()
     {
         logger("---------step load-------------");
-        $from = "2024-06-27";
+        $from = "2022-11-05";
         $to=date('Y-m-d', strtotime($from. ' -600 days'));
         logger($to);
        $arrys= $this->arrayDate($to,$from);
