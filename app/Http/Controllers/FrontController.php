@@ -11,6 +11,7 @@ use App\Models\Fixture;
 use App\Models\FixtureEvent;
 use App\Models\GamePlay;
 use App\Models\League;
+use App\Models\LeagueDay;
 use App\Models\LottoFixture;
 use App\Models\LottoFixtureItem;
 use App\Models\OverFixture;
@@ -38,6 +39,7 @@ class FrontController extends Controller
         }
         $leagues = Fixture::query()->where(['day_timestamp' => $timestamp])->select('league_id')
             ->distinct()->orderBy('league_id')->paginate(5)->appends(['date' => $date_]);;
+            $leagues=LeagueDay::query()->where(['day_timestamp' => $timestamp])->orderBy('league_id')->paginate(5)->appends(['date' => $date_]);
         /*        $data = Fixture::query()->where(['day_timestamp'=>$timestamp])
                    ->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);*/
         return view('home', [
