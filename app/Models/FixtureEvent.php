@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FixtureEvent extends Model
 {
     use HasFactory;
+    public function fixture() {
+        return $this->belongsTo(Fixture::class, 'lt_fixture_id', 'id');
+    }
 }

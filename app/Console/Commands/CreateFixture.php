@@ -46,6 +46,7 @@ class CreateFixture extends Command
 
     function createFixture()
     {
+        logger("dicicc");
         //$leagues = League::query()->where('id', '>', 0)->get();
         $from = date('Y-m-d');
         //  $to=date('Y-m-d', strtotime($from. ' + 1 days'));

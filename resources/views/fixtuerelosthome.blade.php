@@ -24,30 +24,30 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <div>
-                                        <img width="50" height="20" src="{!! $lotto_fixture->team_home_logo !!}"
+                                        <img width="50" height="20" src="{!! $lotto_fixture->fixture->team_home_logo !!}"
                                         >
-                                        {!! $lotto_fixture->team_home_name !!}
+                                        {!! $lotto_fixture->fixture->team_home_name !!}
                                     </div>
 
                                 </div>
                                 <div class="col-md-3">
-                                    {!! $lotto_fixture->score_ft_home !!}
+                                    {!! $lotto_fixture->fixture->score_ft_home !!}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-9">
-                                    <img width="50" height="20" src="{!! $lotto_fixture->team_away_logo !!}"
+                                    <img width="50" height="20" src="{!! $lotto_fixture->fixture->team_away_logo !!}"
                                     >
-                                    {!! $lotto_fixture->team_away_name !!}
+                                    {!! $lotto_fixture->fixture->team_away_name !!}
                                 </div>
                                 <div class="col-md-3">
-                                    {!! $lotto_fixture->score_ft_away !!}
+                                    {!! $lotto_fixture->fixture->score_ft_away !!}
                                 </div>
                             </div>
 
                         </div>
                         <div class="col-md-3">
-                            <a class="btn btn-outline-dark" href="{!! route('detail_fixture',['id'=>$lotto_fixture->id]) !!}"> Detail</a>
+                            <a class="btn btn-outline-dark" href="{!! route('detail_fixture',['id'=>$lotto_fixture->fixture->id]) !!}"> Detail</a>
                         </div>
                     </div>
                         <hr>
@@ -56,7 +56,7 @@
             </div>
 
         <div class="mt-4">
-
+           {{$fixtures->links()}}
         </div>
 
     </div>

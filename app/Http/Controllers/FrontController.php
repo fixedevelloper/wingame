@@ -8,6 +8,7 @@ use App\Helpers\Helpers;
 use App\Models\Country;
 use App\Models\ExactScoreFixture;
 use App\Models\Fixture;
+use App\Models\FixtureEvent;
 use App\Models\GamePlay;
 use App\Models\League;
 use App\Models\LottoFixture;
@@ -191,22 +192,11 @@ class FrontController extends Controller
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
         $data=[];
-        $fixts = Fixture::query()->where(['day_timestamp' => $timestamp])
-            ->orderByDesc('id')->get();
-        foreach ($fixts as $fixt){
-            $lasts=Fixture::query()->where(['team_home_id'=>$fixt->team_home_id])->orWhere(['team_away_id'=>$fixt->team_home_id])->limit(5)->get();
-            $count=0;
-            foreach ($lasts as $last){
-                if ($last->goal_home<$last->goal_away){
-                    $count+=1;
-                }
-            }
-            if ($count>3){
-                $data[]=$fixt;
-            }
-        }
+        $fixts = FixtureEvent::query()->where(['day_timestamp' => $timestamp,'team_position'=>"HOME"])
+            ->orderByDesc('id')->paginate(20);
+
         return view('fixtuerelosthome', [
-            "fixtures" => $data,
+            "fixtures" => $fixts,
             'date' => $date_,
         ]);
     }
@@ -220,22 +210,11 @@ class FrontController extends Controller
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
         $data=[];
-        $fixts = Fixture::query()->where(['day_timestamp' => $timestamp])
-            ->orderByDesc('id')->get();
-        foreach ($fixts as $fixt){
-            $lasts=Fixture::query()->where(['team_away_id'=>$fixt->team_away_id])->orWhere(['team_home_id'=>$fixt->team_away_id])->limit(5)->get();
-            $count=0;
-            foreach ($lasts as $last){
-                if ($last->goal_home<$last->goal_away){
-                    $count+=1;
-                }
-            }
-            if ($count>3){
-                $data[]=$fixt;
-            }
-        }
+        $fixts = FixtureEvent::query()->where(['day_timestamp' => $timestamp,'team_position'=>"AWAY"])
+            ->orderByDesc('id')->paginate(20);
+
         return view('fixtuerelosthome', [
-            "fixtures" => $data,
+            "fixtures" => $fixts,
             'date' => $date_,
         ]);
     }
