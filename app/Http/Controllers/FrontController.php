@@ -105,10 +105,10 @@ class FrontController extends Controller
             }
         }
         foreach ($dataLastHome as $item) {
-            if ($item->score_ft_home > $item->score_ft_away) {
+            if ($item->score_ft_home - $item->score_ft_away>0) {
                 $v_h_l += 1;
             }
-            if ($item->score_ft_home < $item->score_ft_away) {
+            if ($item->score_ft_home - $item->score_ft_away<0) {
                 $v_a_l += 1;
             }
             if (($item->score_ft_away + $item->score_ft_home) > 0.5) {
@@ -128,10 +128,10 @@ class FrontController extends Controller
             }
         }
         foreach ($dataLasAway as $item) {
-            if ($item->score_ft_home > $item->score_ft_away) {
+            if ($item->score_ft_home - $item->score_ft_away>0) {
                 $v_h_a += 1;
             }
-            if ($item->score_ft_home < $item->score_ft_away) {
+            if ($item->score_ft_home - $item->score_ft_away<0) {
                 $v_a_a += 1;
             }
             if (($item->score_ft_away + $item->score_ft_home) > 0.5) {

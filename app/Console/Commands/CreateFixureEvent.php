@@ -28,24 +28,26 @@ class CreateFixureEvent extends Command
      */
     public function handle()
     {
-        $from = "2024-06-30";
-        //$from = date('Y-m-d');
+        //$from = "2024-06-30";
+        $from = date('Y-m-d');
         $timestamp = Carbon::parse($from)->getTimestamp();
         $fixtures=Fixture::query()->where(['day_timestamp' => $timestamp])
             ->orderByDesc('id')->get();
         foreach ($fixtures as $fixture){
-            $lasts=Fixture::query()->where(['team_away_id'=>$fixture->team_away_id])->orWhere(['team_home_id'=>$fixture->team_away_id])->limit(5)->get();
+            $lasts=Fixture::query()->where(['team_away_id' => $fixture->team_away_id])
+                ->where('day_timestamp', '<', $fixture->day_timestamp)->orderByDesc('date')->limit(5)->get();;
             $count=0;
             foreach ($lasts as $last){
-                if ($last->team_home_id==$fixture->team_away_id && $last->goal_home<$last->goal_away){
-                    $count+=1;
-                }
-                if ($last->team_away_id==$fixture->team_away_id && $last->goal_home>$last->goal_away){
+                if ($last->score_ft_home-$last->score_ft_away>0){
                     $count+=1;
                 }
             }
             if ($count>3){
-               $event=new FixtureEvent();
+                $event=FixtureEvent::query()->firstWhere(['lt_fixture_id'=>$fixture->id,'team_position'=>"AWAY",'day_timestamp'=>$fixture->day_timestamp]);
+                if (is_null($event)){
+                    $event=new FixtureEvent();
+                }
+
                $event->lt_fixture_id=$fixture->id;
                $event->fixture_id=$fixture->fixture_id;
                $event->team_position="AWAY";
@@ -53,18 +55,21 @@ class CreateFixureEvent extends Command
                $event->save();
             }
 
-            $last_homes=Fixture::query()->where(['team_away_id'=>$fixture->team_home_id])->orWhere(['team_home_id'=>$fixture->team_home_id])->limit(5)->get();
+            $last_homes=Fixture::query()->where(['team_home_id' => $fixture->team_home_id])
+                ->where('day_timestamp', '<', $fixture->day_timestamp)->orderByDesc('date')->limit(5)->get();
             $count_home=0;
-            foreach ($last_homes as $last){
-                if ($last->team_home_id==$fixture->team_away_id && $last->goal_home<$last->goal_away){
+            foreach ($last_homes as $lasth){
+                if ($lasth->score_ft_home-$lasth->score_ft_away<0){
                     $count_home+=1;
                 }
-                if ($last->team_away_id==$fixture->team_away_id && $last->goal_home>$last->goal_away){
-                    $count_home+=1;
-                }
+
             }
             if ($count_home>3){
-                $eventH=new FixtureEvent();
+                logger($count_home);
+                $eventH=FixtureEvent::query()->firstWhere(['lt_fixture_id'=>$fixture->id,'team_position'=>"HOME",'day_timestamp'=>$fixture->day_timestamp]);
+                if (is_null($eventH)){
+                    $eventH=new FixtureEvent();
+                }
                 $eventH->lt_fixture_id=$fixture->id;
                 $eventH->fixture_id=$fixture->fixture_id;
                 $eventH->team_position="HOME";
