@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('app:create-fixture')->hourly();
         $schedule->command('app:load-over')->everySixHours();
         $schedule->command('app:load-fixture')->at("03:00");
-        $schedule->command('app:create-fixure-event')->dailyAt("03:30");
+        $schedule->command('app:create-fixure-event')->dailyAt("03:50");
     }
 
     /**

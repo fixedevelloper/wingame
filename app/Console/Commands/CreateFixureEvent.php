@@ -28,8 +28,8 @@ class CreateFixureEvent extends Command
      */
     public function handle()
     {
-       // $from = "2024-06-19";
-        $from = date('Y-m-d');
+        $from = "2024-06-30";
+        //$from = date('Y-m-d');
         $timestamp = Carbon::parse($from)->getTimestamp();
         $fixtures=Fixture::query()->where(['day_timestamp' => $timestamp])
             ->orderByDesc('id')->get();
