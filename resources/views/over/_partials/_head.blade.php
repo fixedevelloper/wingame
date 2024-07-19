@@ -6,16 +6,16 @@
             </div>
             <div class="nk-header-brand">
                 <a href="{!! route('home') !!}" class="logo-link">
-                    <img class="logo-light logo-img" src="./images/logo.png" srcset="./images/logo2x.png 2x" alt="logo">
-                    <img class="logo-dark logo-img" src="./images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                    <img class="logo-light logo-img" src="{!! asset('images/logo.png') !!}" alt="logo">
+                    <img class="logo-dark logo-img" src="{!! asset('images/logo.png') !!}"  alt="logo-dark">
                 </a>
             </div><!-- .nk-header-brand -->
             <div class="nk-header-menu" data-content="headerNav">
                 <div class="nk-header-mobile">
                     <div class="nk-header-brand">
                         <a href="{!! route('home') !!}" class="logo-link">
-                            <img class="logo-light logo-img" src="./images/logo.png" srcset="./images/logo2x.png 2x" alt="logo">
-                            <img class="logo-dark logo-img" src="./images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                            <img class="logo-light logo-img" src="{!! asset('images/logo.png') !!}" alt="logo">
+                            <img class="logo-dark logo-img" src="{!! asset('images/logo.png') !!}" alt="logo-dark">
                         </a>
                     </div>
                     <div class="nk-menu-trigger me-n2">

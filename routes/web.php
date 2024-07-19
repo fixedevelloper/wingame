@@ -4,6 +4,7 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,4 +97,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => ['auth','isA
         ->name('transaction_detail');
     Route::match(["POST", "GET"], '/post_payment', [BackendController::class, 'postPayment'])
         ->name('post_payment');
+});
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::match(["POST", "GET"], '/ticket', [TicketController::class, 'tikets'])
+        ->name('tikets');
+    Route::match(["POST", "GET"], '/ticket/{id}', [TicketController::class, 'updatetikets'])
+        ->name('updatetikets');
 });
