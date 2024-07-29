@@ -4,6 +4,7 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
@@ -104,3 +105,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::match(["POST", "GET"], '/ticket/{id}', [TicketController::class, 'updatetikets'])
         ->name('updatetikets');
 });
+Route::match(["POST", "GET"], '/payment', [PaymentController::class, 'init'])
+    ->name('init_payment');
+Route::match(["POST", "GET"], '/payment-finish', [PaymentController::class, 'finish'])
+    ->name('finish_payment');
+Route::match(["POST", "GET"], '/stripe_echec', [PaymentController::class, 'stripe_echec'])
+    ->name('stripe_echec');
+Route::match(["POST", "GET"], '/stripe_success', [PaymentController::class, 'stripe_success'])
+    ->name('stripe_success');

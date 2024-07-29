@@ -114,14 +114,13 @@ class SecurityController extends BaseController
     function getAccount(Request $request,$id){
         $customer=User::query()->find($id);
         return $this->sendResponse([
-            'first_name'=>$customer->first_name,
-            'last_name'=>$customer->last_name,
+            'name'=>$customer->name,
             'phone'=>$customer->phone,
             'email'=>$customer->email,
             'date_born'=>$customer->date_born,
             'photo'=>$customer->photo,
-            'facebook'=>$customer->facebook,
-            'youtube'=>$customer->youtube,
+            'facebook'=>'',
+            'youtube'=>'',
             'balance'=>$customer->balance,
             'phone_verified'=>$customer->phone_verified,
             'email_verified'=>$customer->email_verified,
@@ -147,8 +146,7 @@ class SecurityController extends BaseController
         foreach ($agents->get() as $customer){
             $lists[]=[
                 'id'=>$customer->id,
-                'first_name'=>$customer->first_name,
-                'last_name'=>$customer->last_name,
+                'name'=>$customer->name,
                 'phone'=>$customer->phone,
                 'email'=>$customer->email,
                 'date_born'=>$customer->date_born,
@@ -168,8 +166,7 @@ class SecurityController extends BaseController
     }
     function update(Request $request,$id){
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'name' => 'required',
             'email' => '',
             'photo' => '',
             'phone' => 'required',
@@ -180,9 +177,8 @@ class SecurityController extends BaseController
         }
         $account=User::query()->find($id);
         try {
-            $account->first_name = $request->first_name;
+            $account->name = $request->name;
             $account->phone = $request->phone;
-            $account->last_name = $request->last_name;
             $account->email = $request->email;
             if ($request->has('date_born')) {
                 $account->date_born = $request->date_born;
@@ -216,7 +212,7 @@ class SecurityController extends BaseController
             $account->save();
             $account->update(['last_active_at' => now()]);
             $success['token'] = $account->createToken('ApiToken')->plainTextToken;
-            $success['name'] = $account->first_name." ".$account->last_name;
+            $success['name'] = $account->name;
             $success['country_id'] = $account->country_id;
             $success['phone'] = $account->phone;
             $success['photo'] = $account->photo;

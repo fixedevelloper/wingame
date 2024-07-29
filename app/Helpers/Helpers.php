@@ -16,6 +16,15 @@ use Carbon\Carbon;
 
 class Helpers
 {
+    public static function generatenumber()
+    {
+        $tabs=['1','2','3','4','5','6','7','8','9','0'];
+        $strong=date("ymds");
+        for ($i = 1; $i <= 15; $i++) {
+            $strong .= $tabs[rand(0, count($tabs) - 1)];
+        }
+        return $strong;
+    }
     static function leftTime($date){
 
     }
