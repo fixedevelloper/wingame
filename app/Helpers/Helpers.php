@@ -9,6 +9,7 @@ use App\Models\GamePlay;
 use App\Models\League;
 use App\Models\LottoFixtureItem;
 use App\Models\Odd;
+use App\Models\OverFixture;
 use App\Models\PlayingFixture;
 use App\Models\Stadings;
 use App\Models\Team;
@@ -30,7 +31,7 @@ class Helpers
     }
     static function odd($fixture_id)
     {
-        $odd = Odd::query()->firstWhere(['fixture_id' => $fixture_id]);
+        $odd = OverFixture::query()->firstWhere(['fixture_id' => $fixture_id]);
         return $odd;
     }
 

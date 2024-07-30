@@ -19,8 +19,11 @@
             <div class="card card-inner">
                 <div class="card-body">
                     @foreach($fixtures as $lotto_fixture)
+                        @php
+                        $odd=App\Helpers\Helpers::odd($lotto_fixture->fixture_id)
+                        @endphp
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-7">
                             <div class="row">
                                 <div class="col-md-9">
                                     <div>
@@ -47,6 +50,11 @@
 
                         </div>
                         <div class="col-md-3">
+                            <span class="btn btn-success">{{ $odd->home??null }} </span>-
+                            <span class="btn btn-danger">{!! $odd->draw??null !!}</span>-
+                            <span class="btn btn-success">{!! $odd->away??null !!}</span>
+                        </div>
+                        <div class="col-md-2">
                             <a class="btn btn-outline-dark" href="{!! route('detail_fixture',['id'=>$lotto_fixture->fixture->id]) !!}"> Detail</a>
                         </div>
                     </div>

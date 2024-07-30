@@ -88,6 +88,16 @@ class FootballAPIService
             ['query' => ["date"=> $from,'bookmaker' => 11,'bet'=>5]]);
         return json_decode($res->getBody());
     }
+    static function getAllFixturesBetweenDateAndBookmekerAllBetPage($from,$page){
+        $options=[
+            'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
+            'x-rapidapi-key' => env("APIFOOT_KEY")
+        ];
+        $client = new Client(['headers' => $options]);
+        $res = $client->request('GET', env("APIFOOT_KEY_URL").'/odds',
+            ['query' => ["date"=> $from,'bookmaker' => 11,'bet'=>1,'page'=>$page]]);
+        return json_decode($res->getBody());
+    }
     static function getAllFixturesBetweenDateAndBookmeker($from,$page){
         $options=[
             'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
