@@ -98,15 +98,15 @@ class LoadOver extends Command
             for ($k = 0; $k < sizeof($response); $k++) {
                 $overFixture = OverFixture::query()->firstWhere(['fixture_id' => $response[$k]->fixture->id]);
                 if (is_null($overFixture)) {
-                    $over = new OverFixture();
-                    $over->fixture_id = $response[$k]->fixture->id;
-                    $over->date = $date_;
+                    $overFixture = new OverFixture();
+                    $overFixture->fixture_id = $response[$k]->fixture->id;
+                    $overFixture->date = $date_;
                 }
                     $bookmakers = $response[$k]->bookmakers[0]->bets[0]->values;
-                    $over->home = $bookmakers[0]->odd;
-                    $over->away = $bookmakers[2]->odd;
-                    $over->draw = $bookmakers[1]->odd;
-                    $over->save();
+                $overFixture->home = $bookmakers[0]->odd;
+                $overFixture->away = $bookmakers[2]->odd;
+                $overFixture->draw = $bookmakers[1]->odd;
+                $overFixture->save();
 
 
             }
