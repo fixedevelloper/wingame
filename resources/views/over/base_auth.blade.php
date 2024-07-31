@@ -107,10 +107,14 @@
 <script src="{!! asset("over/js/bundle.js") !!}?ver=3.2.3"></script>
 <script src="{!! asset("over/js/scripts.js") !!}?ver=3.2.3"></script>
 <script>
-    $('#grille_date').change(function () {
-        $('#form_grille').submit()
-    })
+    var configs={
+        routes:{
+            index: "{{\Illuminate\Support\Facades\URL::to('/')}}",
+            calculprice: "{{\Illuminate\Support\Facades\URL::route('calculPrice')}}",
+        }
+    }
 </script>
+@stack('js')
 </body>
 
 </html>

@@ -10,6 +10,7 @@ use App\Services\PaydunyaService;
 use App\Services\StripeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
@@ -52,6 +53,7 @@ class PaymentController extends Controller
               return redirect($id['id']);
 
             }
+
         }
 
         return view('ticket.init', [
@@ -82,9 +84,23 @@ class PaymentController extends Controller
                 return redirect($id['id']);
 
             }
+            if ($type=="mobil"){
+                return redirect()->route('upload_proof');
+
+            }
         }
 
         return view('ticket.payemnt', [
+
+        ]);
+    }
+    public function upload_proof(Request $request)
+    {
+        if ($request->method()=="POST"){
+
+        }
+
+        return view('ticket.proof', [
 
         ]);
     }
@@ -101,5 +117,19 @@ class PaymentController extends Controller
         return view('ticket.payemnt', [
 
         ]);
+    }
+    public function calculPrice(Request $request)
+    {
+        if (is_null($request->get('number_type'))) {
+            return response()->json(['data' => "", 'status' => 403]);
+        }
+        Session::put('number_type', $request->get('pay_type'));
+        if ($request->pay_type=='day'){
+            $amount=$request->number_type*50;
+        }else{
+            $amount=($request->number_type*50)*30;
+        }
+
+        return response()->json(['amount' => $amount, 'status' => 200]);
     }
 }

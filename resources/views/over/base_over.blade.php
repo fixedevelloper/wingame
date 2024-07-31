@@ -114,6 +114,7 @@
         $('#form_grille').submit()
     })
 </script>
+@stack('js')
 </body>
 
 </html>

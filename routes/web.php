@@ -51,6 +51,10 @@ Route::get('/game/{id}', [FrontController::class, 'game'])
     ->name('game');
 Route::get('/resultat/{id}', [FrontController::class, 'resultat'])
     ->name('resultat');
+Route::get('/calculPrice', [PaymentController::class, 'calculPrice'])
+    ->name('calculPrice');
+Route::get('/proof', [PaymentController::class, 'upload_proof'])
+    ->name('upload_proof');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])
         ->name('dashboard');

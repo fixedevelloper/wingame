@@ -17,7 +17,11 @@
                 </div>
             <div class="card-inner-group">
                 <div class="card-inner">
-                    <a class="btn btn-dark btn-block btn-lg">MOBIL MONEY</a>
+                    <form method="POST">
+                        @csrf
+                        <input name="type" value="mobil" hidden>
+                        <button class="btn btn-dark btn-block btn-lg mt-3">MOBIL MONEY</button>
+                    </form>
                     <form method="POST">
                         @csrf
                         <input name="type" value="paydunya" hidden>
