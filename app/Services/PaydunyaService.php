@@ -83,7 +83,7 @@ class PaydunyaService
         $paydunya_args = [
             "invoice" => [
                 "items" => $paydunya_items,
-                "total_amount" => intval($values['amount']),
+                "total_amount" => intval($values['amount'])*600,
                 "description" => "Recharge your wallet amount " . intval($values['amount']) . " for Win4U "
             ], "store" => [
                 "name" => "Win4U",

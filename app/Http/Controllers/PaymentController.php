@@ -75,6 +75,7 @@ class PaymentController extends Controller
                     'phone'=>$transaction->user->phone,
                     'order_key'=>Helpers::generatenumber(),
                 ]);
+                logger($resp);
                 $link=$resp['url'];
                 $transaction->method =$resp['token'];
                 return redirect($link);

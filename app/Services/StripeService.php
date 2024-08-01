@@ -17,7 +17,7 @@ class StripeService
 
         Stripe::setApiKey(env('STRIPE_APIKEY'));
         header('Content-Type: application/json');
-        $currency_code = "XAF";
+        $currency_code = "USD";
 
 
         $currencies_not_supported_cents = ['BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'];
