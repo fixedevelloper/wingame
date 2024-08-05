@@ -107,14 +107,23 @@ class PaymentController extends Controller
     }
     public function stripe_success(Request $request)
     {
-
+        $transaction=Transaction::query()->find($request->id);
+        $transaction->status='accepted';
+        $quantity=$transaction->amount/50;
+        $user=$transaction->user;
+        $date=Carbon::parse($user->expired)->addDays($quantity);
+        $user->expired=$date;
+        $user->save();
+        $transaction->save();
         return view('ticket.payemnt', [
 
         ]);
     }
     public function stripe_echec(Request $request)
     {
-
+        $transaction=Transaction::query()->find($request->id);
+        $transaction->status='rejected';
+        $transaction->save();
         return view('ticket.payemnt', [
 
         ]);

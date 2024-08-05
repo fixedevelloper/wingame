@@ -20,12 +20,12 @@
                     <form method="POST">
                         @csrf
                         <input name="type" value="mobil" hidden>
-                        <button class="btn btn-dark btn-block btn-lg mt-3">MOBIL MONEY</button>
+                        <button title="Congo" class="btn btn-dark btn-block btn-lg mt-3">MOBIL MONEY</button>
                     </form>
                     <form method="POST">
                         @csrf
                         <input name="type" value="paydunya" hidden>
-                    <button class="btn btn-dark btn-block  btn-lg mt-3">PAYDUNYA</button>
+                    <button title="Afrique de l'ouest" class="btn btn-dark btn-block btn-lg mt-3">PAYDUNYA</button>
                     </form>
                     <form method="POST">
                         @csrf
