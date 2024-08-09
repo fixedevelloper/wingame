@@ -48,10 +48,12 @@ class CreateFixture extends Command
     {
 
         //$leagues = League::query()->where('id', '>', 0)->get();
-        $from = date('Y-m-d');
-        //  $to=date('Y-m-d', strtotime($from. ' + 1 days'));
-       // foreach ($leagues as $league) {
-            $data = FootballAPIService::getAllFixturesBetweenDate($from);
+       // $from = date('Y-m-d');
+        $date_ = Carbon::today()->format('Y-m-d');
+        $tomorow_ = Carbon::today()->addDays(1)->format('Y-m-d');
+        $arrays = [$date_, $tomorow_];
+        for ($p = 0; $p < sizeof($arrays); $p++) {
+            $data = FootballAPIService::getAllFixturesBetweenDate($arrays[$p]);
             $response = $data->response;
             for ($i = 0; $i < sizeof($response); $i++) {
                 $fixture = Fixture::query()->firstWhere(['fixture_id' => $response[$i]->fixture->id]);
@@ -92,6 +94,7 @@ class CreateFixture extends Command
                 $fixture->save();
             }
         }
+    }
 
     //}
 }
