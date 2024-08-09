@@ -32,12 +32,15 @@ class LoadOver extends Command
     {
         $date_ = Carbon::today()->format('Y-m-d');
         //  $date_ = "2024-01-25";
-        $timestamp_ = Carbon::today()->addDays(1)->format('Y-m-d');
-        $p_data = FootballAPIService::getAllFixturesBetweenDateAndBookmekerPage($date_);
-        $paging = $p_data->paging->total;
-        $this->createOver($paging, $date_);
-        $this->createNormal($paging, $date_);
-        $this->createExacteScore($paging, $date_);
+        $tomorow_ = Carbon::today()->addDays(1)->format('Y-m-d');
+        $arrays=[$date_,$tomorow_];
+        for ($p=0;$p<sizeof($arrays);$p++) {
+            $p_data = FootballAPIService::getAllFixturesBetweenDateAndBookmekerPage($arrays[$p]);
+            $paging = $p_data->paging->total;
+            $this->createOver($paging, $arrays[$p]);
+            $this->createNormal($paging, $arrays[$p]);
+            $this->createExacteScore($paging, $arrays[$p]);
+        }
     }
 
     function createOver($paging, $date_)
