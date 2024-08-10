@@ -51,6 +51,7 @@ class CreateFixture extends Command
        // $from = date('Y-m-d');
         $date_ = Carbon::today()->format('Y-m-d');
         $tomorow_ = Carbon::today()->addDays(1)->format('Y-m-d');
+
         $arrays = [$date_, $tomorow_];
         for ($p = 0; $p < sizeof($arrays); $p++) {
             $data = FootballAPIService::getAllFixturesBetweenDate($arrays[$p]);
