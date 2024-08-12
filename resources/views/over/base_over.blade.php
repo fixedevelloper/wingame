@@ -110,6 +110,13 @@
 <script src="{!! asset("over/js/bundle.js") !!}?ver=3.2.3"></script>
 <script src="{!! asset("over/js/scripts.js") !!}?ver=3.2.3"></script>
 <script>
+    var configs={
+        routes:{
+            index: "{{\Illuminate\Support\Facades\URL::to('/')}}",
+            home: "{{\Illuminate\Support\Facades\URL::route('home')}}",
+            getgame_ajax: "{{\Illuminate\Support\Facades\URL::route('getfixture')}}",
+        }
+    }
     $('#grille_date').change(function () {
         $('#form_grille').submit()
     })

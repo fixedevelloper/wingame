@@ -528,4 +528,14 @@ class FrontController extends Controller
         return response()->json($balance);
 
     }
+    public function getFixture(Request $request)
+    {
+        $league_id = $request->get("id");
+        $timestamp=$request->get('timestamp');
+        //$timestamp = Carbon::parse($date_)->getTimestamp();
+        $fixtures = Fixture::query()->where(['day_timestamp'=>$timestamp,'league_id'=>$league_id])
+            ->orderByDesc('id')->get();
+        return response()->json($fixtures);
+
+    }
 }

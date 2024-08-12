@@ -51,6 +51,8 @@ Route::get('/game/{id}', [FrontController::class, 'game'])
     ->name('game');
 Route::get('/resultat/{id}', [FrontController::class, 'resultat'])
     ->name('resultat');
+Route::get('/getfixture/', [FrontController::class, 'getFixture'])
+    ->name('getfixture');
 Route::get('/calculPrice', [PaymentController::class, 'calculPrice'])
     ->name('calculPrice');
 Route::get('/proof', [PaymentController::class, 'upload_proof'])
