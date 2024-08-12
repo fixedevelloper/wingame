@@ -28,9 +28,14 @@ class LeagueDay extends Command
      */
     public function handle()
     {
-        $from = date('Y-m-d');
-       $temes= Carbon::parse(Carbon::parse($from)->format('y-m-d'))->getTimestamp();
-        $data = FootballAPIService::getAllFixturesBetweenDate($from);
+      //  $from = date('Y-m-d');
+        $date_ = Carbon::today()->format('Y-m-d');
+        $tomorow_ = Carbon::today()->addDays(1)->format('Y-m-d');
+
+        $arrays = [$date_, $tomorow_];
+        for ($p = 0; $p < sizeof($arrays); $p++) {
+       $temes= Carbon::parse(Carbon::parse($arrays[$p])->format('y-m-d'))->getTimestamp();
+        $data = FootballAPIService::getAllFixturesBetweenDate($arrays[$p]);
         $response = $data->response;
         for ($i = 0; $i < sizeof($response); $i++) {
             $league = \App\Models\LeagueDay::query()->firstWhere(['league_id' => $response[$i]->league->id,'day_timestamp'=>$temes]);
@@ -43,5 +48,5 @@ class LeagueDay extends Command
             }
             $league->save();
         }
-    }
+    }}
 }
