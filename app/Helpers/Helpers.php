@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 
 use App\Models\Fixture;
+use App\Models\FixtureEvent;
 use App\Models\GamePlay;
 use App\Models\League;
 use App\Models\LottoFixtureItem;
@@ -91,6 +92,14 @@ class Helpers
         $timestamp = Carbon::parse($date_)->getTimestamp();
         $data = Fixture::query()->where(['day_timestamp'=>$timestamp,'league_id'=>$league_id])
             ->orderByDesc('id')->get();
+        return $data;
+    }
+    static function getFixtureEventByLeague($league_id,$date_)
+    {
+        $timestamp = Carbon::parse($date_)->getTimestamp();
+        $data = FixtureEvent::query()->leftJoin('fixtures','fixtures.id','=','fixture_events.lt_fixture_id')
+            ->where(['fixture_events.day_timestamp' => $timestamp,'team_position'=>"AWAY",'fixtures.league_id'=>$league_id])
+            ->orderByDesc('fixture_events.id')->get();
         return $data;
     }
     static function getLeague($league_id)

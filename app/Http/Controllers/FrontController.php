@@ -194,11 +194,13 @@ class FrontController extends Controller
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
         $data=[];
-        $fixts = FixtureEvent::query()->where(['day_timestamp' => $timestamp,'team_position'=>"HOME"])
-            ->orderByDesc('id')->paginate(20);
+        $leagues = FixtureEvent::query()->leftJoin('fixtures','fixtures.id','=','fixture_events.lt_fixture_id')
+            ->where(['fixture_events.day_timestamp' => $timestamp,'team_position'=>"HOME"])
+            ->orderByDesc('fixture_events.id')->select(['league_id'])->paginate(10);
 
         return view('fixtuerelosthome', [
-            "fixtures" => $fixts,
+            // "fixtures" => $fixts,
+            'leagues'=>$leagues,
             'date' => $date_,
         ]);
     }
@@ -212,11 +214,15 @@ class FrontController extends Controller
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
         $data=[];
-        $fixts = FixtureEvent::query()->where(['day_timestamp' => $timestamp,'team_position'=>"AWAY"])
-            ->orderByDesc('id')->paginate(20);
+/*        $fixts = FixtureEvent::query()->where(['day_timestamp' => $timestamp,'team_position'=>"AWAY"])
+            ->orderByDesc('id')->paginate(20);*/
+        $leagues = FixtureEvent::query()->leftJoin('fixtures','fixtures.id','=','fixture_events.lt_fixture_id')
+            ->where(['fixture_events.day_timestamp' => $timestamp,'team_position'=>"AWAY"])
+            ->orderByDesc('fixture_events.id')->select(['league_id'])->paginate(10);
 
         return view('fixtuerelosthome', [
-            "fixtures" => $fixts,
+           // "fixtures" => $fixts,
+            'leagues'=>$leagues,
             'date' => $date_,
         ]);
     }

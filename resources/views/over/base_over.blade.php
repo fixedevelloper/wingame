@@ -14,6 +14,7 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{!! asset('over/css/dashlite.min.css') !!}?ver=3.2.3">
     <link id="skin-default" rel="stylesheet" href="{!! asset('over/css/theme.css') !!}?ver=3.2.3">
+    <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 </head>
 
 <body class="nk-body npc-invest bg-lighter ">
