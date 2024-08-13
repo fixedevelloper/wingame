@@ -95,7 +95,7 @@
                                 <span class="btn btn-success">{!! $odd->away??null !!}</span>
                             </div>
                             <div class="col-md-2">
-                                <a class="btn btn-outline-dark" href="{!! route('detail_fixture',['id'=>$lotto_fixture->fixture_id]) !!}"> Detail</a>
+                                <a class="btn btn-outline-dark" href="{!! route('detail_fixture',['id'=>$lotto_fixture->fixture->id]) !!}"> Detail</a>
                             </div>
                         </div>
                         <hr>
