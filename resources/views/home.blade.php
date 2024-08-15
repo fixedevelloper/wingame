@@ -60,55 +60,6 @@
                 </div>
             </div>
         @endforeach
-        {{--    @foreach($leagues as $league)
-                @php
-                    $leag=\App\Helpers\Helpers::getLeague($league->league_id);
-                        $fixtures=\App\Helpers\Helpers::getFixtureByLeague($league->league_id,$date)
-                //$fixtures=[];
-                @endphp
-                <div class="card card-inner">
-                    <div class="card-header" id="{!! $league->league_id !!}">
-                        <img width="50" height="50" src="{!! $leag->logo !!}"
-                        >{!! $leag->name !!}
-                    </div>
-                    <div class="card-body">
-                        @foreach($fixtures as $lotto_fixture)
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <div>
-                                            <img width="50" height="20" src="{!! $lotto_fixture->team_home_logo !!}"
-                                            >
-                                            {!! $lotto_fixture->team_home_name !!}
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-3">
-                                        {!! $lotto_fixture->score_ft_home !!}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <img width="50" height="20" src="{!! $lotto_fixture->team_away_logo !!}"
-                                        >
-                                        {!! $lotto_fixture->team_away_name !!}
-                                    </div>
-                                    <div class="col-md-3">
-                                        {!! $lotto_fixture->score_ft_away !!}
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-3">
-                                <a class="btn btn-outline-dark" href="{!! route('detail_fixture',['id'=>$lotto_fixture->id]) !!}"> Detail</a>
-                            </div>
-                        </div>
-                            <hr>
-                        @endforeach
-                    </div>
-                </div>
-            @endforeach--}}
         <div class="mt-4">
             {{$leagues->links()}}
         </div>
@@ -137,7 +88,7 @@
                         console.log(data)
                         $(id_ph).hide()
                         $.each(data, function (index, value) {
-                            var fixture_id = value.fixture_id;
+                            var fixture_id = value.id;
                             var url = "{{ route('detail_fixture', ['id' => ':id']) }}";
                             url = url.replace(':id', fixture_id);
                             // url = url.replace(':slug', slug);

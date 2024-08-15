@@ -37,13 +37,9 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-        $leagues = Fixture::query()->where(['day_timestamp' => $timestamp])->select('league_id')
-            ->distinct()->orderBy('league_id')->paginate(5)->appends(['date' => $date_]);;
             $leagues=LeagueDay::query()->where(['day_timestamp' => $timestamp])->orderBy('league_id')->paginate(5)->appends(['date' => $date_]);
-        /*        $data = Fixture::query()->where(['day_timestamp'=>$timestamp])
-                   ->orderByDesc('id')->paginate(20)->appends(['date'=>$date_]);*/
+
         return view('home', [
-            // "fixtures" => $data,
             'date' => $date_,
             'leagues' => $leagues
         ]);
