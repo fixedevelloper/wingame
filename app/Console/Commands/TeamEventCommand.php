@@ -43,7 +43,7 @@ class TeamEventCommand extends Command
                     $teamE=new TeamEvent();
                 }
                 $teamE->team_id=$fixture->team_home_id;
-                $teamE->fixture_id=$fixture->fixture_id;
+                $teamE->fixture_id=$fixture->id;
                 $teamE->day_timestamp=$timestamp;
                 $teamE->last5_no_lost=true;
                 $teamE->save();
@@ -54,7 +54,7 @@ class TeamEventCommand extends Command
                     $teamE = new TeamEvent();
                 }
                 $teamE->team_id=$fixture->team_away_id;
-                $teamE->fixture_id=$fixture->fixture_id;
+                $teamE->fixture_id=$fixture->id;
                 $teamE->day_timestamp=$timestamp;
                 $teamE->last5_no_lost=true;
                 $teamE->save();
