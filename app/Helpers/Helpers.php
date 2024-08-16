@@ -99,7 +99,10 @@ class Helpers
     static function getTeamNoLostLast5($team_id,$timestamp)
     {
         $fixtures=Fixture::query()->where(['team_home_id'=>$team_id])
-            ->orWhere(['team_away_id'=>$team_id])->where('day_timestamp','<',$timestamp)->orderByDesc('fixture_id')->limit(5)->get();
+            ->orWhere(['team_away_id'=>$team_id])
+            ->where('day_timestamp','<',$timestamp)
+            ->where('st_short','=','FT')
+            ->orderByDesc('fixture_id')->limit(5)->get();
         $count=0;
         foreach ($fixtures as $item){
             if ($item->team_away_id==$team_id && $item->team_home_winner==false){

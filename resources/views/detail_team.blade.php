@@ -29,7 +29,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-10 mt-5">
-            <table>
+            <table class="table">
                 <thead>
                 <tr>
                     <th>Team home</th>
@@ -42,7 +42,7 @@
                 <tr>
                     <td>{{ $fixture->team_home_name }}</td>
                     <td>
-                        {!! \Carbon\Carbon::parse($fixture->date)->format("D , d,M,Y") !!}<br>
+                       <span class="badge bg-success"> {!! \Carbon\Carbon::parse($fixture->date)->format("D , d,M,Y") !!}</span><br>
                         {!! $fixture->score_ft_home !!}-{!! $fixture->score_ft_away !!}</td>
                     <td>{{ $fixture->team_away_name }}</td>
                 </tr>

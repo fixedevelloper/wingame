@@ -29,13 +29,36 @@ class LoadFixture extends Command
     public function handle()
     {
         logger("---------step load-------------");
-        $from = "2022-11-05";
+/*        $from = "2022-11-05";
         $to=date('Y-m-d', strtotime($from. ' -600 days'));
         logger($to);
        $arrys= $this->arrayDate($to,$from);
        for ($p=0;$p<sizeof($arrys);$p++){
            $this->createFixtureDate($arrys[$p]);
-       }
+       }*/
+        $timestamp = Carbon::today()->getTimestamp();
+        $fixtures=Fixture::query()->where('score_ft_home','=',null)
+            ->where('day_timestamp','<',$timestamp)->get();
+        foreach ($fixtures as $fixture){
+
+
+            $fixture->st_long = $response[$i]->fixture->status->long;
+            $fixture->st_short = $response[$i]->fixture->status->short;
+            $fixture->st_elapsed = is_null($response[$i]->fixture->status->elapsed) ? " " : $response[$i]->fixture->status->elapsed;
+            $fixture->team_away_winner = is_null($response[$i]->teams->away->winner) ? 0 : $response[$i]->teams->away->winner;
+            $fixture->team_home_winner = is_null($response[$i]->teams->home->winner) ? 0 : $response[$i]->teams->home->winner;
+            $fixture->goal_home = $response[$i]->goals->home;
+            $fixture->goal_away = $response[$i]->goals->away;
+            $fixture->score_ht_home = $response[$i]->score->halftime->home;
+            $fixture->score_ht_away = $response[$i]->score->halftime->away;
+            $fixture->score_ft_home = $response[$i]->score->fulltime->home;
+            $fixture->score_ft_away = $response[$i]->score->fulltime->away;
+            $fixture->score_ext_home = $response[$i]->score->extratime->home;
+            $fixture->score_ext_away = $response[$i]->score->extratime->away;
+            $fixture->score_pt_home = $response[$i]->score->penalty->home;
+            $fixture->score_pt_away = $response[$i]->score->penalty->away;
+            $fixture->save();
+        }
     }
    function loadPropulse(){
        $date_ = Carbon::today()->format('Y-m-d');
