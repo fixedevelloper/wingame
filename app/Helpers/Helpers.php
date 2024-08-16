@@ -74,6 +74,15 @@ class Helpers
         return [
             'name' => is_null($team) ? "" : $team->name,
             'logo' => is_null($team) ? "" : $team->logo,
+            'country' => is_null($team) ? "" : $team->country,
+        ];
+    }
+    static function getTeamBy($team_id)
+    {
+        $team = Team::query()->firstWhere(['team_id' => $team_id]);
+        return [
+            'name' => is_null($team) ? "" : $team->name,
+            'logo' => is_null($team) ? "" : $team->logo,
         ];
     }
     static function getFixture($fixture_id)
@@ -86,6 +95,25 @@ class Helpers
     {
         $fixtures=LottoFixtureItem::query()->where(['lotto_fixture_id'=>$fixture_id])->get();
         return $fixtures;
+    }
+    static function getTeamNoLostLast5($team_id,$timestamp)
+    {
+        $fixtures=Fixture::query()->where(['team_home_id'=>$team_id])
+            ->orWhere(['team_away_id'=>$team_id])->where('day_timestamp','<',$timestamp)->orderByDesc('fixture_id')->limit(5)->get();
+        $count=0;
+        foreach ($fixtures as $item){
+            if ($item->team_away_id==$team_id && $item->team_home_winner==false){
+               $count++;
+            }
+            if ($item->team_home_id==$team_id && $item->team_home_winner==false){
+                $count++;
+            }
+        }
+        if ($count>=5){
+            return true;
+        }else{
+            return false;
+        }
     }
     static function getFixtureByLeague($league_id,$date_)
     {

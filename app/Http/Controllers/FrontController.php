@@ -271,7 +271,36 @@ class FrontController extends Controller
 
         ]);
     }
-
+    public function lastFixture_defeats(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+        $teams=[];
+      $fixtures=Fixture::query()->where(['day_timestamp' => $timestamp])->limit(10)->get();
+        foreach ($fixtures as $fixture){
+            if (Helpers::getTeamNoLostLast5($fixture->team_home_id,$timestamp)==true){
+                $teams[]=[
+                    'team_id'=>$fixture->team_home_id,
+                    'fixture'=>$fixture
+                ];
+            }
+            if (Helpers::getTeamNoLostLast5($fixture->team_away_id,$timestamp)==true){
+                $teams[]=[
+                    'team_id'=>$fixture->team_away_id,
+                    'fixture'=>$fixture
+                ];
+            }
+        }
+        return view('lastfixture_defaits', [
+            'date' => $date_,
+            'teams' => $teams
+        ]);
+    }
     public function over5_5(Request $request)
     {
         if (is_null($request->get('date'))) {

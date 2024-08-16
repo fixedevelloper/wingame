@@ -35,6 +35,8 @@ Route::get('/fixture_lost_home', [FrontController::class, 'fixture_lost'])
     ->name('fixture_lost');
 Route::get('/fixture_lost_away', [FrontController::class, 'fixture__away_lost'])
     ->name('fixture_lost_away');
+Route::get('/fixture_not_lost', [FrontController::class, 'lastFixture_defeats'])
+    ->name('lastFixture_defeats');
 Route::get('/detail_fixture/{id}', [FrontController::class, 'detail_fixture'])
     ->name('detail_fixture');
 Route::get('/over5_5', [FrontController::class, 'over5_5'])

@@ -63,6 +63,11 @@
                             <span class="nk-menu-text">Score exactes</span>
                         </a>
                     </li>
+                    <li class="nk-menu-item">
+                        <a href="{!! route('lastFixture_defeats') !!}" class="nk-menu-link">
+                            <span class="nk-menu-text">Equipes sans defaites</span>
+                        </a>
+                    </li>
                 </ul><!-- .nk-menu -->
             </div><!-- .nk-header-menu -->
             <div class="nk-header-tools">
