@@ -108,7 +108,7 @@ class Helpers
             if ($item->team_away_id==$team_id && $item->team_home_winner==false){
                $count++;
             }
-            if ($item->team_home_id==$team_id && $item->team_home_winner==false){
+            if ($item->team_home_id==$team_id && $item->team_away_winner==false){
                 $count++;
             }
         }
