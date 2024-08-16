@@ -280,7 +280,7 @@ class FrontController extends Controller
             ->orWhere(['team_away_id'=>$team_id])->where('day_timestamp','<',$fixture->day_timestamp)->orderByDesc('fixture_id')->limit(5)->get();
 
 
-        return view('deatl_fixture', [
+        return view('detail_team', [
             "fixture" => $fixture,
             'team'=>Team::query()->find($team_id),
             'fixtures'=>$fixtures
