@@ -28,24 +28,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @for($i=0;$i<sizeof($teams);$i++)
+                        @foreach($teams as $item)
                             @php
-                                $team=App\Helpers\Helpers::getTeamByID($teams[$i]['team_id'])
+                                $team=App\Helpers\Helpers::getTeamByID($item->team_id)
                             @endphp
                             <tr>
                                 <td> <img width="50" height="50" src="{!! $team['logo'] !!}"
                                     >{{ $team['name'] }}</td>
                                 <td>{{ $team['country'] }}</td>
-                                <td><a class="btn btn-primary" href="{{ route('detail_fixture',['id'=>$teams[$i]['fixture']->id]) }}">Detail</a></td>
+                                <td><a class="btn btn-primary" href="{{ route('detail_fixture',['id'=>$item->fixture_id]) }}">Detail</a></td>
                                 <td></td>
                             </tr>
 
-                        @endfor
+                        @endforeach
 
                         </tbody>
 
                     </table>
-
+                    <div class="mt-4">
+                        {{$teams->links()}}
+                    </div>
                 </div>
             </div>
 

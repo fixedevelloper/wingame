@@ -128,4 +128,14 @@ class FootballAPIService
             ['query' => ["h2h"=> $home.'-'.$away,"last"=>5]]);
         return json_decode($res->getBody());
     }
+    static function getStatdings($league_id,$season){
+        $options=[
+            'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
+            'x-rapidapi-key' => env("APIFOOT_KEY")
+        ];
+        $client = new Client(['headers' => $options]);
+        $res = $client->request('GET', env("APIFOOT_KEY_URL").'/standings',
+            ['query' => [ 'league' => $league_id,'season'=>$season]]);
+        return json_decode($res->getBody());
+    }
 }

@@ -17,6 +17,7 @@ use App\Models\LottoFixtureItem;
 use App\Models\OverFixture;
 use App\Models\PlayingFixture;
 use App\Models\Team;
+use App\Models\TeamEvent;
 use App\Models\User;
 use App\Services\FootballAPIService;
 use Carbon\Carbon;
@@ -280,22 +281,7 @@ class FrontController extends Controller
             $date_ = $request->get('date');
             $timestamp = Carbon::parse($date_)->getTimestamp();
         }
-        $teams=[];
-      $fixtures=Fixture::query()->where(['day_timestamp' => $timestamp])->limit(10)->get();
-        foreach ($fixtures as $fixture){
-            if (Helpers::getTeamNoLostLast5($fixture->team_home_id,$timestamp)==true){
-                $teams[]=[
-                    'team_id'=>$fixture->team_home_id,
-                    'fixture'=>$fixture
-                ];
-            }
-            if (Helpers::getTeamNoLostLast5($fixture->team_away_id,$timestamp)==true){
-                $teams[]=[
-                    'team_id'=>$fixture->team_away_id,
-                    'fixture'=>$fixture
-                ];
-            }
-        }
+        $teams=TeamEvent::query()->where(['day_timestamp' => $timestamp,'last5_no_lost'=>true])->paginate(20);
         return view('lastfixture_defaits', [
             'date' => $date_,
             'teams' => $teams
