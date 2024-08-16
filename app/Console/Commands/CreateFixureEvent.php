@@ -41,9 +41,7 @@ class CreateFixureEvent extends Command
                 ->orderByDesc('id')->get();
             foreach ($fixtures as $fixture) {
                 $lasts = Fixture::query()->where(['team_away_id' => $fixture->team_away_id])
-                    ->where('day_timestamp', '<', $fixture->day_timestamp)
-                    ->where('st_short','=','FT')
-                    ->orderByDesc('date')->limit(5)->get();;
+                    ->where('day_timestamp', '<', $fixture->day_timestamp)->orderByDesc('date')->limit(5)->get();;
                 $count = 0;
                 foreach ($lasts as $last) {
                     if ($last->score_ft_home - $last->score_ft_away > 0) {
@@ -64,9 +62,7 @@ class CreateFixureEvent extends Command
                 }
 
                 $last_homes = Fixture::query()->where(['team_home_id' => $fixture->team_home_id])
-                    ->where('day_timestamp', '<', $fixture->day_timestamp)
-                    ->where('st_short','=','FT')
-                    ->orderByDesc('date')->limit(5)->get();
+                    ->where('day_timestamp', '<', $fixture->day_timestamp)->orderByDesc('date')->limit(5)->get();
                 $count_home = 0;
                 foreach ($last_homes as $lasth) {
                     if ($lasth->score_ft_home - $lasth->score_ft_away < 0) {

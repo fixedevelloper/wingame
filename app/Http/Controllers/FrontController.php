@@ -277,7 +277,9 @@ class FrontController extends Controller
         $fixture = Fixture::query()->find($id);
         $team_id=$request->team;
         $fixtures=Fixture::query()->where(['team_home_id'=>$team_id])
-            ->orWhere(['team_away_id'=>$team_id])->where('day_timestamp','<',$fixture->day_timestamp)->orderByDesc('fixture_id')->limit(5)->get();
+            ->orWhere(['team_away_id'=>$team_id])
+            ->where('day_timestamp','<',$fixture->day_timestamp)
+            ->orderByDesc('fixture_id')->limit(5)->get();
 
 
         return view('detail_team', [

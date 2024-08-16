@@ -41,9 +41,9 @@
                 @foreach($fixtures as $fixture)
                 <tr>
                     <td>{{ $fixture->team_home_name }}</td>
-                    <td>
+                    <td class="text-center">
                        <span class="badge bg-success"> {!! \Carbon\Carbon::parse($fixture->date)->format("D , d,M,Y") !!}</span><br>
-                        {!! $fixture->score_ft_home !!}-{!! $fixture->score_ft_away !!}</td>
+                      <span class="center">{!! $fixture->score_ft_home !!}-{!! $fixture->score_ft_away !!}</span>  </td>
                     <td>{{ $fixture->team_away_name }}</td>
                 </tr>
                 @endforeach
