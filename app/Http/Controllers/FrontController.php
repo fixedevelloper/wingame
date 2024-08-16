@@ -272,6 +272,21 @@ class FrontController extends Controller
 
         ]);
     }
+    public function detail_fixtureTeamLost(Request $request, $id)
+    {
+        $fixture = Fixture::query()->find($id);
+        $team_id=$request->team;
+        $fixtures=Fixture::query()->where(['team_home_id'=>$team_id])
+            ->orWhere(['team_away_id'=>$team_id])->where('day_timestamp','<',$fixture->day_timestamp)->orderByDesc('fixture_id')->limit(5)->get();
+
+
+        return view('deatl_fixture', [
+            "fixture" => $fixture,
+            'team'=>Team::query()->find($team_id),
+            'fixtures'=>$fixtures
+
+        ]);
+    }
     public function lastFixture_defeats(Request $request)
     {
         if (is_null($request->get('date'))) {

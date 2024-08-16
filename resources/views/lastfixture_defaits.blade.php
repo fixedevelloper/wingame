@@ -37,7 +37,7 @@
                                     >{{ $team['name'] }}</td>
                                 <td>{{ $team['country'] }}</td>
                                 <td><a class="btn btn-primary" href="{{ route('detail_fixture',['id'=>$item->fixture_id]) }}">Detail</a></td>
-                                <td></td>
+                                <td><a class="btn btn-dark" href="{{ route('detail_fixtureTeamLost',['id'=>$item->fixture_id,'team'=>$item->team_id]) }}">listes</a></td>
                             </tr>
 
                         @endforeach
