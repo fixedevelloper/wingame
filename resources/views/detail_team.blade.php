@@ -43,7 +43,7 @@
                     <td>{{ $fixture->team_home_name }}</td>
                     <td>
                         {!! \Carbon\Carbon::parse($fixture->date)->format("D , d,M,Y") !!}<br>
-                        {!! $lotto_fixture->fixture->score_ft_home !!}-{!! $lotto_fixture->fixture->score_ft_away !!}</td>
+                        {!! $fixture->score_ft_home !!}-{!! $fixture->score_ft_away !!}</td>
                     <td>{{ $fixture->team_away_name }}</td>
                 </tr>
                 @endforeach
