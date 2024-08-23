@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ScrapperController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,8 @@ Route::match(['POST','GET'],'/post_game', [FrontController::class, 'postGame'])
     ->name('postGame');
 Route::get('/', [FrontController::class, 'home'])
     ->name('home');
+Route::match(['POST','GET'],'/scrapper', [ScrapperController::class, 'scrapper_page'])
+    ->name('scrapper_page');
 Route::get('/fixture_lost_home', [FrontController::class, 'fixture_lost'])
     ->name('fixture_lost');
 Route::get('/fixture_lost_away', [FrontController::class, 'fixture__away_lost'])

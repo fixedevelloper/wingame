@@ -2,33 +2,33 @@
 
 @-moz-keyframes dothabottomcheck{
     0% { height: 0; }
-    100% { height: $checkbox-height/2; }
+    100% { height: 2px/2; }
 }
 
 @-webkit-keyframes dothabottomcheck{
     0% { height: 0; }
-    100% { height: $checkbox-height/2; }
+    100% { height: 2px/2; }
 }
 
 @keyframes dothabottomcheck{
     0% { height: 0; }
-    100% { height: $checkbox-height/2;  }
+    100% { height: 2px/2;  }
 }
 
 @keyframes dothatopcheck{
     0% { height: 0; }
     50% { height: 0; }
-    100% { height: $checkbox-height * 1.2; }
+    100% { height: 2px * 1.2; }
 }
 @-webkit-keyframes dothatopcheck{
     0% { height: 0; }
     50% { height: 0; }
-    100% { height: $checkbox-height * 1.2; }
+    100% { height: 2px * 1.2; }
 }
 @-moz-keyframes dothatopcheck{
     0% { height: 0; }
     50% { height: 0; }
-    100% { height: $checkbox-height * 1.2; }
+    100% { height: 2px * 1.2; }
 }
 
 input[type=checkbox]{
@@ -36,20 +36,20 @@ input[type=checkbox]{
 }
 
 .check-box {
-    height: $checkbox-height;
-    width: $checkbox-height;
+    height: 2px;
+    width: 2px;
     background-color: transparent;
-    border: $checkbox-height * .1 solid $unchecked-color;
+    border: 2px * .1 solid green;
     border-radius: 5px;
     position: relative;
     display: inline-block;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    -moz-transition: border-color ease $duration/2;
-    -o-transition: border-color ease $duration/2;
-    -webkit-transition: border-color ease $duration/2;
-    transition: border-color ease $duration/2;
+    -moz-transition: border-color ease 2/2;
+    -o-transition: border-color ease 2/2;
+    -webkit-transition: border-color ease 2/2;
+    transition: border-color ease 2/2;
     cursor:pointer;
 
     &::before, &::after {
@@ -58,8 +58,8 @@ input[type=checkbox]{
         box-sizing: border-box;
         position: absolute;
         height: 0;
-        width: $checkbox-height * .2;
-        background-color: $checked-color;
+        width: 2px * .2;
+        background-color: bleu;
         display: inline-block;
         -moz-transform-origin: left top;
         -ms-transform-origin: left top;
@@ -74,9 +74,9 @@ input[type=checkbox]{
     }
 
     &::before {
-        top:$checkbox-height * .72;
-        left: $checkbox-height * .41;
-        box-shadow: 0 0 0 $checkbox-height * .05 $background-color;
+        top:2px * .72;
+        left: 2px * .41;
+        box-shadow: 0 0 0 2px * .05 #fff;
         -moz-transform: rotate(-135deg);
         -ms-transform: rotate(-135deg);
         -o-transform: rotate(-135deg);
@@ -85,8 +85,8 @@ input[type=checkbox]{
     }
 
     &::after {
-        top: $checkbox-height * .37;
-        left: $checkbox-height * .05;
+        top: 2px * .37;
+        left: 2px * .05;
         -moz-transform: rotate(-45deg);
         -ms-transform: rotate(-45deg);
         -o-transform: rotate(-45deg);
@@ -97,21 +97,21 @@ input[type=checkbox]{
 
 input[type=checkbox]:checked + .check-box,
 .check-box.checked{
-    border-color:$checked-color;
+    border-color:bleu;
 
     &::after{
-        height: $checkbox-height * .5;
-        -moz-animation: dothabottomcheck $duration/2 ease 0s forwards;
-        -o-animation: dothabottomcheck $duration/2 ease 0s forwards;
-        -webkit-animation: dothabottomcheck $duration/2 ease 0s forwards;
-        animation: dothabottomcheck $duration/2 ease 0s forwards;
+        height: 2px * .5;
+        -moz-animation: dothabottomcheck 2/2 ease 0s forwards;
+        -o-animation: dothabottomcheck 2/2 ease 0s forwards;
+        -webkit-animation: dothabottomcheck 2/2 ease 0s forwards;
+        animation: dothabottomcheck 2/2 ease 0s forwards;
     }
 
     &::before{
-        height: $checkbox-height * 1.2;
-        -moz-animation: dothatopcheck $duration ease 0s forwards;
-        -o-animation: dothatopcheck $duration ease 0s forwards;
-        -webkit-animation: dothatopcheck $duration ease 0s forwards;
-        animation: dothatopcheck $duration ease 0s forwards;
+        height: 2px * 1.2;
+        -moz-animation: dothatopcheck 2 ease 0s forwards;
+        -o-animation: dothatopcheck 2 ease 0s forwards;
+        -webkit-animation: dothatopcheck 2 ease 0s forwards;
+        animation: dothatopcheck 2 ease 0s forwards;
     }
 }

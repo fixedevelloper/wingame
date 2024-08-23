@@ -163,10 +163,5 @@
     </div>
 @endsection
 @push("script")
-    <script>
-        jQuery(window).on('load',function () {
-            'use strict';
-            lotto.getBalance();
-        });
-    </script>
+
 @endpush
