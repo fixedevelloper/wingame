@@ -88,7 +88,9 @@
                                     {{$line->score_h}}- {{$line->score_a}}
                                 </td>
                                 <td>
-                                    1({{$line->stat_1}})- 2({{$line->stat_2}})- N({{$line->stat_n}})- 12({{$line->stat_12}})
+                                    <span class="badge bg-success">1({{$line->stat_1}})</span>-
+                                    <span class="badge bg-danger">2({{$line->stat_2}})</span>-
+                                    <span class="badge bg-black">N({{$line->stat_n}})</span>- <span class="badge bg-primary">12({{$line->stat_12}})</span>
                                 </td>
                             </tr>
                         @endforeach
