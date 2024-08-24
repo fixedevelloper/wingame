@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 
 use App\Helpers\ConvertHelper;
+use App\Models\Scrappronos;
+use Carbon\Carbon;
 use Goutte\Client;
 use Illuminate\Http\Request;
 
@@ -15,6 +17,13 @@ class ScrapperController extends Controller
 
         $client = new Client();
         $lines=[];
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
         if ($request->method()=='POST'){
             // Go to the symfony.com website
             $crawler = $client->request('GET', $request->search);
@@ -25,6 +34,7 @@ class ScrapperController extends Controller
 
             });
             for ($i=1;$i<sizeof($tables[1]);$i++){
+
                 $lines[]=[
                     'home'=>$this->diviseString($tables[1][$i][3]),
                     'away'=>$this->diviseString($tables[1][$i][7]),
@@ -40,6 +50,32 @@ class ScrapperController extends Controller
         return view('scraping.scrapping', [
             'lines'=>$lines
         ]);
+    }
+    public function scrapper_save(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+        $ob = $data['ob'];
+
+        for ($i = 0; $i < sizeof($ob); ++$i) {
+            logger((explode("-",$ob[$i]['home'])));
+            if (isset(explode("-",$ob[$i]['home'])[1])){
+                $pronos = Scrappronos::query()->firstWhere(['date' => $ob[$i]['date'],
+                    'team_home'=>explode("-",$ob[$i]['home'])[0],'team_away'=>explode("-",$ob[$i]['home'])[1]]);
+                if (is_null($pronos)) {
+                    $pronos = new Scrappronos();
+                    $pronos->date = $ob[$i]['date'];
+                }
+                $pronos->team_home =explode("-",$ob[$i]['home'])[0];
+                $pronos->team_away = explode("-",$ob[$i]['home'])[1];
+                $pronos->logique = $ob[$i]['logique'];
+                $pronos->suprise = $ob[$i]['suprise'];
+                $pronos->domicile =$ob[$i]['domicile'];
+                $pronos->null =$ob[$i]['nul'];
+                $pronos->exterieur =$ob[$i]['exterieur'];
+                $pronos->save();
+            }
+
+        }
     }
     function strip_comments($html)
     {
