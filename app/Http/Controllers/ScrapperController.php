@@ -12,6 +12,20 @@ use Illuminate\Http\Request;
 
 class ScrapperController extends Controller
 {
+    public function scrapper_list(Request $request)
+    {
+        if (is_null($request->get('date'))) {
+            $date_ = Carbon::today()->format('Y-m-d');
+            $timestamp = Carbon::today()->getTimestamp();
+        } else {
+            $date_ = $request->get('date');
+            $timestamp = Carbon::parse($date_)->getTimestamp();
+        }
+        $lines=Scrappronos::query()->where(['date'=>$date_])->get();
+        return view('scraping.scrapping_list', [
+            'lines'=>$lines
+        ]);
+    }
     public function scrapper_page(Request $request)
     {
 
@@ -72,10 +86,13 @@ class ScrapperController extends Controller
                 $pronos->domicile =$ob[$i]['domicile'];
                 $pronos->null =$ob[$i]['nul'];
                 $pronos->exterieur =$ob[$i]['exterieur'];
+                $pronos->score_h =$ob[$i]['score_h'];
+                $pronos->score_a =$ob[$i]['score_a'];
                 $pronos->save();
             }
 
         }
+        return response()->json($ob);
     }
     function strip_comments($html)
     {

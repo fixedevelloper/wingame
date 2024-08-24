@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('null')->nullable();
             $table->string('domicile')->nullable();
             $table->string('exterieur')->nullable();
+
             $table->timestamps();
         });
     }

@@ -36,6 +36,8 @@ Route::match(['POST','GET'],'/scrapper', [ScrapperController::class, 'scrapper_p
     ->name('scrapper_page');
 Route::match(['POST','GET'],'/scrapper_save', [ScrapperController::class, 'scrapper_save'])
     ->name('scrapper_save');
+Route::match(['POST','GET'],'/scrapper_list', [ScrapperController::class, 'scrapper_list'])
+    ->name('scrapper_list');
 Route::get('/fixture_lost_home', [FrontController::class, 'fixture_lost'])
     ->name('fixture_lost');
 Route::get('/fixture_lost_away', [FrontController::class, 'fixture__away_lost'])

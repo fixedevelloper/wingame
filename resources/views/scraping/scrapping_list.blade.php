@@ -15,15 +15,11 @@
             <!-- .nk-block-head-content -->
         </div>
         <div class="nk-block-head-content">
-            <div class="search-content">
-                <form method="POST">
+                <form method="POST" id="form_grille">
                     @csrf
-                    <a href="#" class="search-back btn btn-icon toggle-search" data-target="search"><em class="icon ni ni-arrow-left"></em></a>
-                    <input type="text" name="search" class="form-control form-control-sm border-transparent form-focus-none" placeholder="Url search by pronos">
-                    <button type="submit" class="search-submit btn btn-icon"><em class="icon ni ni-search"></em></button>
-                </form>
+                    <input id="grille_date" type="date" name="search" class="form-control" placeholder="Url search by pronos">
 
-            </div>
+                </form>
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
     <div class="nk-block">
@@ -61,70 +57,40 @@
                                 <span class="tb-odr-total">Mr Exterieur</span>
                             </th>
                             <th class="">
-                                <span class="tb-odr-total">ScoreA</span>
-                            </th>
-                            <th class="">
-                                <span class="tb-odr-total">ScoreB</span>
+                                <span class="tb-odr-total">Score</span>
                             </th>
                         </tr>
                         </thead>
                         <tbody class="tb-odr-body">
-                        @for($i=0;$i<sizeof($lines);$i++)
+                        @foreach($lines as $line)
                             <tr>
-                                <td>{{$lines[$i]['home']}}-{{$lines[$i]['away']}}</td>
+                                <td>{{$line->team_home}}-{{$line->team_away}}</td>
                                 <td>
-                                    <select>
-                                        <option>1</option>
-                                        <option>N</option>
-                                        <option>2</option>
-                                        <option>12</option>
-                                    </select>
-                                </td>
-                                <td> <select>
-                                        <option>1</option>
-                                        <option>N</option>
-                                        <option>2</option>
-                                        <option>12</option>
-                                    </select>
-                                </td>
-                                <td> <select>
-                                        <option>1</option>
-                                        <option>N</option>
-                                        <option>2</option>
-                                        <option>12</option>
-                                    </select>
+                                    {{$line->logique}}
                                 </td>
                                 <td>
-                                    <select>
-                                        <option>1</option>
-                                        <option>N</option>
-                                        <option>2</option>
-                                        <option>12</option>
-                                    </select>
-                                </td>
-                                <td> <select>
-                                        <option>1</option>
-                                        <option>N</option>
-                                        <option>2</option>
-                                        <option>12</option>
-                                    </select>
+                                    {{$line->suprise}}
                                 </td>
                                 <td>
-                                    <input type="number">
+                                    {{$line->domicile}}
                                 </td>
                                 <td>
-                                    <input type="number">
+                                    {{$line->null}}
+                                </td>
+                                <td>
+                                    {{$line->exterieur}}
+                                </td>
+                                <td>
+                                    {{$line->score_h}}- {{$line->score_a}}
                                 </td>
 
                             </tr>
-                        @endfor
+                        @endforeach
 
                         </tbody>
                     </table>
                 </div><!-- .card-inner -->
                 <div class="card-footer">
-                    <input class="form-control" id="date" type="date">
-                    <button class="btn btn-primary mt-3" id="save_scrape">save</button>
                 </div>
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
@@ -150,10 +116,8 @@
                     var domicile= row.cells[3].children[0].value;
                     var nul= row.cells[4].children[0].value;
                     var exterieur= row.cells[5].children[0].value;
-                    var score_h= row.cells[6].children[0].value;
-                    var score_a= row.cells[7].children[0].value;
                     item = {};
-                    item['date'] =$('#date').val();
+                    item['date'] = "";
                     item['home'] =home;
                       item['away'] = away;
                       item['logique'] = logique;
@@ -161,8 +125,6 @@
                     item['domicile'] = domicile;
                     item['nul'] = nul;
                     item['exterieur'] = exterieur;
-                    item['score_h'] = score_h;
-                    item['score_a'] = score_a;
                     jsonObj.push(item)
                 });
                 console.log(JSON.stringify({data: jsonObj}))
