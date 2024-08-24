@@ -89,10 +89,43 @@ class ScrapperController extends Controller
                 $pronos->score_h =$ob[$i]['score_h'];
                 $pronos->score_a =$ob[$i]['score_a'];
                 $pronos->save();
+
             }
 
         }
         return response()->json($ob);
+    }
+    function calculStat1($data){
+        $n1=0;
+        $n2=0;
+        $n3=0;
+        $n12=0;
+        for ($i=0;$i<$data;$i++){
+            switch ($data[$i]){
+                case 1:
+                    $n1+=1;
+                    break;
+                case 2:
+                    $n2+=1;
+                    break;
+                case 3:
+                    $n3+=1;
+                    break;
+                case 12:
+                    $n12+=1;
+                    break;
+
+            }
+
+        }
+        return [
+            'n1'=>$n1,
+            'n2'=>$n2,
+            'n3'=>$n3,
+            'n12'=>$n12,
+
+        ];
+
     }
     function strip_comments($html)
     {

@@ -17,7 +17,7 @@
         <div class="nk-block-head-content">
                 <form method="POST" id="form_grille">
                     @csrf
-                    <input id="grille_date" type="date" name="search" class="form-control" placeholder="Url search by pronos">
+                    <input id="grille_date" type="date" name="date" class="form-control" placeholder="Url search by pronos">
 
                 </form>
         </div><!-- .nk-block-between -->
