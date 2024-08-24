@@ -59,6 +59,10 @@
                             <th class="">
                                 <span class="tb-odr-total">Score</span>
                             </th>
+                            <th class="">
+                                <span class="tb-odr-total">Statistique</span>
+                            </th>
+
                         </tr>
                         </thead>
                         <tbody class="tb-odr-body">
@@ -83,7 +87,9 @@
                                 <td>
                                     {{$line->score_h}}- {{$line->score_a}}
                                 </td>
-
+                                <td>
+                                    1({{$line->stat_1}})- 2({{$line->stat_2}})- N({{$line->stat_n}})- 12({{$line->stat_12}})
+                                </td>
                             </tr>
                         @endforeach
 

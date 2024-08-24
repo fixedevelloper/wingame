@@ -88,8 +88,20 @@ class ScrapperController extends Controller
                 $pronos->exterieur =$ob[$i]['exterieur'];
                 $pronos->score_h =$ob[$i]['score_h'];
                 $pronos->score_a =$ob[$i]['score_a'];
+                $data=[
+                    $ob[$i]['logique'],
+                    $ob[$i]['suprise'],
+                    $ob[$i]['domicile'],
+                    $ob[$i]['nul'],
+                    $ob[$i]['exterieur']
+                ];
+                $result=$this->calculStat1($data);
+                logger($result);
+                $pronos->stat_1 =($result['n1']/sizeof($data))*100;
+                $pronos->stat_2 =($result['n2']/sizeof($data))*100;
+                $pronos->stat_n =($result['n3']/sizeof($data))*100;
+                $pronos->stat_12 =($result['n12']/sizeof($data))*100;
                 $pronos->save();
-
             }
 
         }
@@ -100,7 +112,7 @@ class ScrapperController extends Controller
         $n2=0;
         $n3=0;
         $n12=0;
-        for ($i=0;$i<$data;$i++){
+        for ($i=0;$i<sizeof($data);$i++){
             switch ($data[$i]){
                 case 1:
                     $n1+=1;
@@ -108,7 +120,7 @@ class ScrapperController extends Controller
                 case 2:
                     $n2+=1;
                     break;
-                case 3:
+                case "N":
                     $n3+=1;
                     break;
                 case 12:
