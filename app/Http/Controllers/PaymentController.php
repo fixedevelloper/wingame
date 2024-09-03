@@ -116,7 +116,7 @@ class PaymentController extends Controller
                 $transaction->idproof=$rest['transactionId'];
                 $transaction->save();
                 Session::put('trans_ref',$rest['transactionId']);
-                return redirect()->route('waitingpayment',[]);
+                return redirect()->route('waiting_page',[]);
             }
         }
 
