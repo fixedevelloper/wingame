@@ -1,4 +1,8 @@
-@extends('base')
+@extends('over.base_auth')
+@section('title')  @endsection
+@push("scripts")
+
+@endpush
 @push('css')
     <style>
         body {
