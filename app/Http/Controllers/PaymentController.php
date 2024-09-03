@@ -4,9 +4,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Helper\Helper;
 use App\Helpers\Helpers;
+use App\Models\Payment;
 use App\Models\Transaction;
 use App\Services\PaydunyaService;
+use App\Services\PaymentApiService;
 use App\Services\StripeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,16 +19,19 @@ class PaymentController extends Controller
 {
     private $paydunyaService;
     private $stripeService;
+    protected $paymentApiService;
 
     /**
      * PaymentController constructor.
-     * @param $paydunyaService
-     * @param $stripeService
+     * @param PaydunyaService $paydunyaService
+     * @param StripeService $stripeService
+     * @param PaymentApiService $paymentApiService
      */
-    public function __construct(PaydunyaService $paydunyaService, StripeService $stripeService)
+    public function __construct(PaydunyaService $paydunyaService, StripeService $stripeService,PaymentApiService $paymentApiService)
     {
         $this->paydunyaService = $paydunyaService;
         $this->stripeService = $stripeService;
+        $this->paymentApiService = $paymentApiService;
     }
 
 
@@ -86,7 +92,7 @@ class PaymentController extends Controller
 
             }
             if ($type=="mobil"){
-                return redirect()->route('upload_proof');
+                return redirect()->route('upload_proof',['trans_id'=>$transaction->id]);
 
             }
         }
@@ -98,10 +104,29 @@ class PaymentController extends Controller
     public function upload_proof(Request $request)
     {
         if ($request->method()=="POST"){
-
+            $transaction=Transaction::query()->find($request->trans_id);
+            $rest=$this->paymentApiService->payment([
+                'phone'=>$request->phone,
+                'amount'=>intval($transaction->amount),
+                'country'=>$request->country,
+                'carrier'=>$request->carrier
+            ]);
+            logger($rest);
+            if ($rest['status']=='true'){
+                $transaction->idproof=$rest['transactionId'];
+                $transaction->save();
+                Session::put('trans_ref',$rest['transactionId']);
+                return redirect()->route('waitingpayment',[]);
+            }
         }
 
         return view('ticket.proof', [
+
+        ]);
+    }
+    public function waiting_page(Request $request)
+    {
+        return view('ticket.waitingpayment', [
 
         ]);
     }

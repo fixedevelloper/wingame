@@ -66,8 +66,10 @@ Route::get('/getfixture/', [FrontController::class, 'getFixture'])
     ->name('getfixture');
 Route::get('/calculPrice', [PaymentController::class, 'calculPrice'])
     ->name('calculPrice');
-Route::get('/proof', [PaymentController::class, 'upload_proof'])
+Route::match(['POST','GET'],'/proof', [PaymentController::class, 'upload_proof'])
     ->name('upload_proof');
+Route::match(['POST','GET'],'/waiting_page', [PaymentController::class, 'waiting_page'])
+    ->name('waiting_page');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])
         ->name('dashboard');

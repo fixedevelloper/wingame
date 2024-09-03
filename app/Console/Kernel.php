@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('app:create-standing')->at("02:00");
         $schedule->command('app:create-fixure-event')->dailyAt("01:25");
         $schedule->command('app:league-day')->dailyAt("01:30");
+        $schedule->command('app:make-status')->everyFifteenSeconds();
     }
 
     /**

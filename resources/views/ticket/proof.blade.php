@@ -9,14 +9,56 @@
             <div class="card-inner card-inner-lg">
                 <div class="nk-block-head">
                     <div class="nk-block-head-content">
-                        <h4 class="nk-block-title">UPLOAD PROOF OF PAYMENT</h4>
+                        <h4 class="nk-block-title text-uppercase">Confirm Your PAYMENT</h4>
                         <div class="nk-block-des">
                             <p>Secure and rapid.</p>
                         </div>
                     </div>
                 </div>
             <div class="card-inner-group">
-                <div class="card-inner">
+                <form method="POST">
+                    <div class="form-group">
+                        <label class="form-label">Country</label>
+                        <div class="form-control-wrap">
+                            <select name="country" class="form-select js-select2">
+                                <option value="Congo">Congo</option>
+                                <option value="DRC">RDC</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Carrier</label>
+                        <div class="form-control-wrap">
+                            <select name="carrier" class="form-select js-select2">
+                                <option value="NONE">Choose carrier</option>
+                                <option value="MTN">MTN</option>
+                                <option value="Orange">ORANGE</option>
+                                <option value="Airtel">Airtel</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <label class="form-label" for="default-01">Phone</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control form-control-lg" id="default-01" name="phone">
+                        </div>
+                    </div>
+                {{--    <div class="form-group">
+                        <div class="form-label-group">
+                            <label class="form-label" for="default-01">Amount(FCFA)</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <input value="{{env('PRICE_GAME')}}" type="text" class="form-control form-control-lg" id="default-01" name="amount" readonly>
+                        </div>
+                    </div>--}}
+                    <div class="form-group">
+                        <button class="btn btn-lg btn-primary btn-block">SendPayment</button>
+                    </div>
+                    @csrf
+                </form>
+{{--                <div class="card-inner">
 
 
                     <p>Effectuer un depot de Au numero <span class="h6">+242 06 444 9019</span></p>
@@ -44,10 +86,10 @@
                         <button type="submit" class="btn btn-dark btn-block  btn-lg mt-3">Save</button>
                     </form>
 
-                </div><!-- .card-inner -->
-            </div><!-- .card-inner-group -->
-        </div><!-- .card -->
-    </div><!-- .nk-block -->
+                </div>--}}
+            </div>
+        </div>
+    </div>
 
 @endsection
 @push('js')
