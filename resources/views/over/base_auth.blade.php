@@ -10,7 +10,7 @@
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="./images/favicon.png">
     <!-- Page Title  -->
-    <title>{!! env('app_name') !!} </title>
+    <title>B-coupon </title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{!! asset('over/css/dashlite.min.css') !!}?ver=3.2.3">
     <link id="skin-default" rel="stylesheet" href="{!! asset('over/css/theme.css') !!}?ver=3.2.3">

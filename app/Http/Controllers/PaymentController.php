@@ -37,33 +37,10 @@ class PaymentController extends Controller
 
     public function init(Request $request)
     {
-        if ($request->method()=="POST"){
-            $type=$request->type;
-            $transaction=new Transaction();
-            $transaction->type=$type;
-            $transaction->amount=$request->amount;
-            $transaction->user_id=$request->user_id;
-            $transaction->save();
-            if ($type=="paydunya"){
-                $resp=  $this->paydunyaService->make_payment([
-                'amount'=>$request->amount,
-                    'phone'=>$transaction->user->phone,
-                    'order_key'=>Helpers::generatenumber(),
-                ]);
-                $link=$resp['url'];
-                $transaction->method =$resp['token'];
-                return redirect($link);
-            }
-            if ($type=="stripe"){
-              $id=  $this->stripeService->payment_process_3d($request->amount,$transaction->id);
-              return redirect($id['id']);
-
-            }
-
-        }
 
         return view('ticket.init', [
-            'user_id'=>$request->user_id
+            'user_id'=>$request->user_id,
+            'amount'=>env('PRICE_COUPON')
         ]);
     }
     public function finish(Request $request)
@@ -81,7 +58,6 @@ class PaymentController extends Controller
                     'phone'=>$transaction->user->phone,
                     'order_key'=>Helpers::generatenumber(),
                 ]);
-                logger($resp);
                 $link=$resp['url'];
                 $transaction->method =$resp['token'];
                 return redirect($link);

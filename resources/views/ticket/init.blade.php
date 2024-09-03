@@ -20,8 +20,9 @@
 
                     <form method="GET" action="{!! route('finish_payment',['user_id'=>$user_id]) !!}">
                         <input name="user_id" value="{!! $user_id !!}" hidden>
+                        <p>Pay coupon on day</p>
                         @csrf
-                        <div class="form-group">
+                      {{--  <div class="form-group">
                             <label class="form-label">Pay by</label>
                             <div class="form-control-wrap">
                                 <select id="pay_type" name="pay_type" class="form-select js-select2">
@@ -35,11 +36,11 @@
                                 <input required name="number_type" type="number" class="form-control form-control-outlined form-control-lg" id="number_type" placeholder="1">
                                 <label class="form-label-outlined" for="number_type">Enter number <span id="type_k"></span></label>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="form-group">
                             <div class="form-control-wrap">
                                 <label class="form-label" for="outlined">Amount($)</label>
-                                <input required readonly name="amount" type="number" class="form-control form-control-lg" id="outlined" placeholder="Amount">
+                                <input required readonly name="amount" type="number" value="{{$amount}}" class="form-control form-control-lg" id="outlined" placeholder="Amount">
 
                             </div>
                         </div>
