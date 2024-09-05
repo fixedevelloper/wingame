@@ -26,7 +26,7 @@ class TicketApiController extends BaseController
         if (is_null($customer)){
             return $this->sendError('User not found','User not found');
         }
-        if ($customer->expired<$request->date){
+        if ($customer->sold<500){
             return $this->sendError('Coupon not found','User date expire');
         }
         $coupons=Ticket::query()->where('date','=',$request->date)->orderByDesc("created_at")->get();

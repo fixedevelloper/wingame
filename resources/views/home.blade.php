@@ -77,7 +77,7 @@
                 var id_ph = '#ph' + $(this).data('id')
                 $.ajax({
                     url: configs.routes.getgame_ajax,
-                    async: false,
+                    async: true,
                     type: "GET",
                     dataType: "JSON",
                     data: {
