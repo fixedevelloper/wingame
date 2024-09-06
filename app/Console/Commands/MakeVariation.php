@@ -53,9 +53,15 @@ class MakeVariation extends Command
                 $overFixture->away = $bookmakers[2]->odd;
                 $overFixture->draw = $bookmakers[1]->odd;
                 $overFixture->save();
-                $overFixture->variation_home =(($overFixture->old_home-$overFixture->home)/$overFixture->old_home)*100;
-                $overFixture->variation_away =(($overFixture->old_away-$overFixture->away)/$overFixture->old_away)*100;
-                $overFixture->variation_draw =(($overFixture->old_draw-$overFixture->draw)/$overFixture->old_draw)*100;
+                if ($overFixture->old_home>0){
+                    $overFixture->variation_home =(($overFixture->old_home-$overFixture->home)/$overFixture->old_home)*100;
+                }
+               if ($overFixture->old_away>0){
+                   $overFixture->variation_away =(($overFixture->old_away-$overFixture->away)/$overFixture->old_away)*100;
+               }
+               if ($overFixture->old_draw>0){
+                   $overFixture->variation_draw =(($overFixture->old_draw-$overFixture->draw)/$overFixture->old_draw)*100;
+               }
                 $overFixture->save();
 
             }
