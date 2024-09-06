@@ -7,6 +7,7 @@
 
     <div class="row container">
 <h4> Fixtures Over 5.5</h4>
+        <i class="icon ni ni-arrow-up"></i>
         <div class="col-3 float-end">
             <form id="form_grille">
                 <input name="date"  type="date" value="{{$date}}" class="form-control m-2" id="grille_date">

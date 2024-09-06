@@ -93,7 +93,7 @@
                             url = url.replace(':id', fixture_id);
                             var sfH = value.score_ft_home == null ? '-' : value.score_ft_home;
                             var sfA = value.score_ft_away == null ? '-' : value.score_ft_away;
-                            var variation_span=value.variation_home_st==true?'<i class="fa fa-arrow-up"></i>':'<i class="fa fa-arrow-up"></i>'
+                            var variation_span=value.variation_home_st>0?'<i class="icon ni ni-arrow-up"></i>':value.variation_home_st<0?'<i class="icon ni ni-arrow-down"></i>':'<i class="icon ni ni-arrow-right"></i>'
 
                             $(id_card).append('<div class="row">' +
                                 '<div class="col-md-6">' +
