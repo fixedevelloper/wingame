@@ -108,8 +108,8 @@
                                 '                                </div>' +
                                 '                            </div>' +
                                 '                            <div class="col-md-3">' +
-                                '                              <span>'+value.variation_home+variation_span+' <span class="btn btn-success">'+value.odd_home+'</span> '+
-                                '<span class="btn btn-danger"> '+value.odd_draw+'</span> '+'<span class="btn btn-success">'+value.odd_away+'</span> '+
+                                '                              <span class="badge badge-dot bg-success">'+value.variation_home+variation_span+'</span> <span class="btn btn-success">'+value.odd_home+'</span> '+
+                                ' <span class="badge badge-dot bg-dark">'+value.variation_draw+variation_span+'</span> <span class="btn btn-danger"> '+value.odd_draw+'</span> '+' <span class="badge badge-dot bg-success">'+value.variation_away+variation_span+'</span> <span class="btn btn-success">'+value.odd_away+'</span> '+
                                 '                            </div>' +
                                 '<div class="col-md-3">' +
                                 '                                <a class="btn btn-outline-dark" href=' + url + '> Detail</a>' +
