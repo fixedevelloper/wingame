@@ -94,6 +94,8 @@
                             var sfH = value.score_ft_home == null ? '-' : value.score_ft_home;
                             var sfA = value.score_ft_away == null ? '-' : value.score_ft_away;
                             var variation_span=value.variation_home_st>0?'<i class="icon ni ni-arrow-up"></i>':value.variation_home_st<0?'<i class="icon ni ni-arrow-down"></i>':'<i class="icon ni ni-arrow-right"></i>'
+                            var variation_span_draw=value.variation_draw_st>0?'<i class="icon ni ni-arrow-up"></i>':value.variation_draw_st<0?'<i class="icon ni ni-arrow-down"></i>':'<i class="icon ni ni-arrow-right"></i>'
+                            var variation_span_away=value.variation_away_st>0?'<i class="icon ni ni-arrow-up"></i>':value.variation_away_st<0?'<i class="icon ni ni-arrow-down"></i>':'<i class="icon ni ni-arrow-right"></i>'
 
                             $(id_card).append('<div class="row">' +
                                 '<div class="col-md-5">' +
@@ -109,7 +111,7 @@
                                 '                            </div>' +
                                 '                            <div class="col-md-4">' +
                                 '                              <span class="badge  bg-success">'+value.variation_home+variation_span+'</span> <span class="btn btn-success">'+value.odd_home+'</span> '+
-                                ' <span class="badge  bg-dark">'+value.variation_draw+variation_span+'</span> <span class="btn btn-danger"> '+value.odd_draw+'</span> '+' <span class="badge  bg-success">'+value.variation_away+variation_span+'</span> <span class="btn btn-success">'+value.odd_away+'</span> '+
+                                ' <span class="badge  bg-dark">'+value.variation_draw+variation_span_draw+'</span> <span class="btn btn-danger"> '+value.odd_draw+'</span> '+' <span class="badge  bg-success">'+value.variation_away+variation_span_away+'</span> <span class="btn btn-success">'+value.odd_away+'</span> '+
                                 '                            </div>' +
                                 '<div class="col-md-3">' +
                                 '                                <a class="btn btn-outline-dark" href=' + url + '> Detail</a>' +
