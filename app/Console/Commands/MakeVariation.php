@@ -29,9 +29,13 @@ class MakeVariation extends Command
     public function handle()
     {
         $date_ = Carbon::today()->format('Y-m-d');
-        $p_data = FootballAPIService::getAllFixturesBetweenDateAndBookmekerPage($date_);
-        $paging = $p_data->paging->total;
-        $this->createNormal($paging, $date_);
+        $tomorow_ = Carbon::today()->addDays(1)->format('Y-m-d');
+        $arrays=[$date_,$tomorow_];
+        for ($p=0;$p<sizeof($arrays);$p++) {
+            $p_data = FootballAPIService::getAllFixturesBetweenDateAndBookmekerPage($arrays[$p]);
+            $paging = $p_data->paging->total;
+            $this->createNormal($paging, $arrays[$p]);
+        }
     }
     function createNormal($paging, $date_)
     {
