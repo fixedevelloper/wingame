@@ -96,7 +96,7 @@
                             var variation_span=value.variation_home_st>0?'<i class="icon ni ni-arrow-up"></i>':value.variation_home_st<0?'<i class="icon ni ni-arrow-down"></i>':'<i class="icon ni ni-arrow-right"></i>'
 
                             $(id_card).append('<div class="row">' +
-                                '<div class="col-md-6">' +
+                                '<div class="col-md-5">' +
                                 '<div class="row">' +
                                 ' <div class="col-md-9"><img width="50" height="20" src="' + value.team_home_logo + '">' + value.team_home_name + '</div>' +
                                 '<div class="col-md-3">' + sfH + '</div>' +
@@ -107,9 +107,9 @@
                                 '                                    <div class="col-md-3">' + sfA + '</div>' +
                                 '                                </div>' +
                                 '                            </div>' +
-                                '                            <div class="col-md-3">' +
-                                '                              <span class="badge badge-dot bg-success">'+value.variation_home+variation_span+'</span> <span class="btn btn-success">'+value.odd_home+'</span> '+
-                                ' <span class="badge badge-dot bg-dark">'+value.variation_draw+variation_span+'</span> <span class="btn btn-danger"> '+value.odd_draw+'</span> '+' <span class="badge badge-dot bg-success">'+value.variation_away+variation_span+'</span> <span class="btn btn-success">'+value.odd_away+'</span> '+
+                                '                            <div class="col-md-4">' +
+                                '                              <span class="badge  bg-success">'+value.variation_home+variation_span+'</span> <span class="btn btn-success">'+value.odd_home+'</span> '+
+                                ' <span class="badge  bg-dark">'+value.variation_draw+variation_span+'</span> <span class="btn btn-danger"> '+value.odd_draw+'</span> '+' <span class="badge  bg-success">'+value.variation_away+variation_span+'</span> <span class="btn btn-success">'+value.odd_away+'</span> '+
                                 '                            </div>' +
                                 '<div class="col-md-3">' +
                                 '                                <a class="btn btn-outline-dark" href=' + url + '> Detail</a>' +
