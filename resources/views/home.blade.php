@@ -91,11 +91,12 @@
                             var fixture_id = value.id;
                             var url = "{{ route('detail_fixture', ['id' => ':id']) }}";
                             url = url.replace(':id', fixture_id);
-                            // url = url.replace(':slug', slug);
                             var sfH = value.score_ft_home == null ? '-' : value.score_ft_home;
                             var sfA = value.score_ft_away == null ? '-' : value.score_ft_away;
+                            var variation_span=value.variation_home_st==true?'<i class="fa fa-arrow-up"></i>':'<i class="fa fa-arrow-up"></i>'
 
-                            $(id_card).append('<div class="row"><div class="col-md-9">' +
+                            $(id_card).append('<div class="row">' +
+                                '<div class="col-md-6">' +
                                 '<div class="row">' +
                                 ' <div class="col-md-9"><img width="50" height="20" src="' + value.team_home_logo + '">' + value.team_home_name + '</div>' +
                                 '<div class="col-md-3">' + sfH + '</div>' +
@@ -107,6 +108,10 @@
                                 '                                </div>' +
                                 '                            </div>' +
                                 '                            <div class="col-md-3">' +
+                                '                              <span>'+value.variation_home+variation_span+' <span class="btn btn-success">'+value.odd_home+'</span> '+
+                                '<span class="btn btn-danger"> '+value.odd_draw+'</span> '+'<span class="btn btn-success">'+value.odd_away+'</span> '+
+                                '                            </div>' +
+                                '<div class="col-md-3">' +
                                 '                                <a class="btn btn-outline-dark" href=' + url + '> Detail</a>' +
                                 '                            </div>' +
                                 '                        </div><hr>')

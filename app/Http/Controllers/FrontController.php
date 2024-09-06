@@ -569,7 +569,28 @@ class FrontController extends Controller
         //$timestamp = Carbon::parse($date_)->getTimestamp();
         $fixtures = Fixture::query()->where(['day_timestamp'=>$timestamp,'league_id'=>$league_id])
             ->orderByDesc('id')->get();
-        return response()->json($fixtures);
+        $array=[];
+        foreach ($fixtures as $fixture){
+            $over=OverFixture::query()->firstWhere(['fixture_id'=>$fixture->fixture_id]);
+            $array[]=[
+                'score_ft_home'=>$fixture->score_ft_home,
+                'score_ft_away'=>$fixture->score_ft_away,
+                'id'=>$fixture->id,
+                'team_home_logo'=>$fixture->team_home_logo,
+                'team_home_name'=>$fixture->team_home_name,
+                'team_away_logo'=>$fixture->team_away_logo,
+                'odd_home'=>$over==null?'':$over->home,
+                'odd_away'=>$over==null?'':$over->away,
+                'odd_draw'=>$over==null?'':$over->draw,
+                'variation_home'=>$over==null?'':($over->variation_home),
+                'variation_away'=>$over==null?'':($over->variation_away),
+                'variation_draw'=>$over==null?'':($over->variation_home),
+                'variation_home_st'=>$over==null?'': $over->home<$over->old_home,
+                'variation_away_st'=>$over==null?'':$over->away<$over->old_away,
+                'variation_draw_st'=>$over==null?'':$over->draw<$over->old_draw,
+            ];
+        }
+        return response()->json($array);
 
     }
 }
