@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('app:create-fixture')->everyThirtyMinutes();
-        $schedule->command('app:load-over')->everyThirtyMinutes();
+        $schedule->command('app:load-over')->everyFourHours();
+        $schedule->command('app:make-variation')->everyThirtyMinutes();
         $schedule->command('app:team-event-command')->at("03:00");
         $schedule->command('app:create-standing')->at("02:00");
         $schedule->command('app:create-fixure-event')->dailyAt("01:25");
