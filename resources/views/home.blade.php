@@ -110,8 +110,8 @@
                                 '                                </div>' +
                                 '                            </div>' +
                                 '                            <div class="col-md-4">' +
-                                '                              <span class="badge  bg-success">'+value.variation_home+variation_span+'</span> <span class="btn btn-success">'+value.odd_home+'</span> '+
-                                ' <span class="badge  bg-dark">'+value.variation_draw+variation_span_draw+'</span> <span class="btn btn-danger"> '+value.odd_draw+'</span> '+' <span class="badge  bg-success">'+value.variation_away+variation_span_away+'</span> <span class="btn btn-success">'+value.odd_away+'</span> '+
+                                '                              <span class="badge  bg-success">'+value.variation_home+variation_span+'</span> <span class="btn btn-sm btn-success">'+value.odd_home+'</span> '+
+                                ' <span class="badge  bg-dark">'+value.variation_draw+variation_span_draw+'</span> <span class="btn btn-sm btn-danger"> '+value.odd_draw+'</span> '+' <span class="badge  bg-success">'+value.variation_away+variation_span_away+'</span> <span class="btn btn-sm btn-success">'+value.odd_away+'</span> '+
                                 '                            </div>' +
                                 '<div class="col-md-3">' +
                                 '                                <a class="btn btn-outline-dark" href=' + url + '> Detail</a>' +
