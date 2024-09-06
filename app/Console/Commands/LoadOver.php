@@ -105,12 +105,17 @@ class LoadOver extends Command
                     $overFixture->fixture_id = $response[$k]->fixture->id;
                     $overFixture->date = $date_;
                 }
-                    $bookmakers = $response[$k]->bookmakers[0]->bets[0]->values;
+                $overFixture->old_home=$overFixture->home;
+                $overFixture->old_away=$overFixture->away;
+                $overFixture->old_draw=$overFixture->draw;
+                $bookmakers = $response[$k]->bookmakers[0]->bets[0]->values;
                 $overFixture->home = $bookmakers[0]->odd;
                 $overFixture->away = $bookmakers[2]->odd;
                 $overFixture->draw = $bookmakers[1]->odd;
+                $overFixture->variation_home =(($overFixture->old_home-$overFixture->home)/$overFixture->old_home)*100;
+                $overFixture->variation_away =(($overFixture->old_away-$overFixture->away)/$overFixture->old_away)*100;
+                $overFixture->variation_draw =(($overFixture->old_draw-$overFixture->draw)/$overFixture->old_draw)*100;
                 $overFixture->save();
-
 
             }
         }
