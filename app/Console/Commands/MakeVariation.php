@@ -50,7 +50,7 @@ class MakeVariation extends Command
                 $overFixture->old_draw=$overFixture->draw;
                 $bookmakers = $response[$k]->bookmakers[0]->bets[0]->values;
                 $overFixture->home = $bookmakers[0]->odd;
-                $overFixture->away = $bookmakers[2]->odd;
+                $overFixture->away =isset($bookmakers[2])?$bookmakers[2]->odd:"" ;
                 $overFixture->draw = $bookmakers[1]->odd;
                 $overFixture->save();
                 if ($overFixture->old_home>0){
