@@ -29,6 +29,7 @@ class TicketApiController extends BaseController
         if ($customer->sold<500){
             return $this->sendError('Coupon not found','User date expire');
         }
+        $customer->last_sold+=1;
         $coupons=Ticket::query()->where('date','=',$request->date)->orderByDesc("created_at")->get();
         $data=[];
         foreach ($coupons as $coupon){
@@ -40,6 +41,7 @@ class TicketApiController extends BaseController
               'date'=>$coupon->date,
             ];
         }
+        $customer->save();
         return $this->sendResponse($data, 'coupons successfully.');
     }
     function couponLastDay(Request $request)

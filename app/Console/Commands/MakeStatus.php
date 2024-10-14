@@ -42,7 +42,6 @@ class MakeStatus extends Command
     public function handle()
     {
         $operations=Transaction::query()->where(['status'=>"pending"])->get();
-        logger($operations);
         foreach ($operations as $operation) {
             $rest=$this->paymentApiService->getPayID([
                 'transactionId'=>$operation->idproof,
@@ -52,7 +51,6 @@ class MakeStatus extends Command
                     if ($operation->status!="success"){
                         DB::beginTransaction();
                         $transaction=Transaction::query()->firstWhere(['idproof'=>$operation->idproof]);
-                        logger($transaction);
                         $user=User::query()->find($transaction->user_id);
                         if (is_null($user->sold)){
                             $user->sold=$operation->amount;
