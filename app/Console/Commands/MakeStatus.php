@@ -51,8 +51,14 @@ class MakeStatus extends Command
                 if ($rest['status']=="Success"){
                     if ($operation->status!="success"){
                         DB::beginTransaction();
-                        $user=User::query()->find($operation->idproof);
-                        $user->sold+=$operation->amount;
+                        $transaction=Transaction::query()->firstWhere(['idproof'=>$operation->idproof]);
+                        logger($transaction);
+                        $user=User::query()->find($transaction->user_id);
+                        if (is_null($user->sold)){
+                            $user->sold=$operation->amount;
+                        }else{
+                            $user->sold+=$operation->amount;
+                        }
                         $operation->status="success";
                         $operation->save();
                         $user->save();
